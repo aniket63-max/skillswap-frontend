@@ -1,0 +1,997 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>SkillSwap - Settings</title>
+
+    <link rel="stylesheet" href="frontend\css/style.css">
+</head>
+
+<body class="settings-body">
+
+<header class="dashboard-navbar">
+
+   <div class="logo">
+    <img src="images/skillswap-logo.png" alt="SkillSwap">
+</div>
+
+    <nav class="dashboard-nav">
+
+        <a href="dashboard.html" class="nav-link">
+            <span class="nav-icon">⌂</span>
+            Home
+        </a>
+
+        <a href="profile.html" class="nav-link">
+            <span class="nav-icon">◎</span>
+            Profile
+        </a>
+
+        <a href="discover.html" class="nav-link">
+            <span class="nav-icon">⌕</span>
+            Discover
+        </a>
+
+        <a href="requests.html" class="nav-link">
+            <span class="nav-icon">♧</span>
+            Requests
+        </a>
+
+        <a href="chat.html" class="nav-link">
+            <span class="nav-icon">◌</span>
+            Chat
+        </a> 
+
+        
+<a href="reviews.html" class="nav-link">
+    <span class="nav-icon">★</span>
+    Reviews
+</a>
+
+
+    </nav>
+
+    <div class="nav-actions">
+
+        <button
+            class="notification-btn"
+            title="Notifications"
+            onclick="window.location.href='notifications.html'"
+        >
+            ♧
+            <span class="notification-dot"></span>
+        </button>
+
+        <div class="nav-divider"></div>
+
+        <div class="nav-user-wrapper">
+
+    <button class="nav-user" id="navUserButton">
+
+        <div class="avatar">A</div>
+
+        <div class="nav-user-info">
+            <strong>Student</strong>
+            <span>CSE Student</span>
+        </div>
+
+        <span class="nav-chevron">⌄</span>
+
+    </button>
+
+
+    <div class="user-dropdown" id="userDropdown">
+
+        <a href="profile.html" class="user-dropdown-item">
+            <span>◎</span>
+
+            <div>
+                <strong>Profile</strong>
+                <small>View your profile</small>
+            </div>
+        </a>
+
+
+        <a href="settings.html" class="user-dropdown-item">
+            <span>⚙</span>
+
+            <div>
+                <strong>Settings</strong>
+                <small>Manage your account</small>
+            </div>
+        </a>
+
+
+        <div class="user-dropdown-divider"></div>
+
+
+        <button
+            class="user-dropdown-item logout-dropdown"
+            onclick="logoutUser()"
+        >
+            <span>↪</span>
+
+            <div>
+                <strong>Logout</strong>
+                <small>Sign out of SkillSwap</small>
+            </div>
+        </button>
+
+    </div>
+
+</div>
+    </div>
+
+</header>
+
+
+<main class="settings-page">
+
+    <!-- HEADER -->
+
+    <section class="settings-header">
+
+        <div>
+            <span class="settings-eyebrow">
+                ACCOUNT CONTROL
+            </span>
+
+            <h1>Settings</h1>
+
+            <p>
+                Manage your account, preferences, notifications and privacy.
+            </p>
+        </div>
+
+        <div class="settings-profile-mini">
+
+            <div class="settings-mini-avatar">
+                A
+            </div>
+
+            <div>
+                <strong>Student</strong>
+                <span>CSE Student</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div class="settings-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="settings-sidebar">
+
+            <button class="settings-menu active" data-section="account">
+                <span>◎</span>
+                Account
+            </button>
+
+            <button class="settings-menu" data-section="security">
+                <span>◇</span>
+                Security
+            </button>
+
+            <button class="settings-menu" data-section="notifications">
+                <span>♧</span>
+                Notifications
+            </button>
+
+            <button class="settings-menu" data-section="appearance">
+                <span>◐</span>
+                Appearance
+            </button>
+
+            <button class="settings-menu" data-section="privacy">
+                <span>◉</span>
+                Privacy
+            </button>
+
+            <div class="settings-sidebar-divider"></div>
+
+            <button class="settings-menu logout-menu" onclick="logoutUser()">
+                <span>↪</span>
+                Log out
+            </button>
+
+        </aside>
+
+
+        <!-- CONTENT -->
+
+        <section class="settings-content">
+
+
+            <!-- ACCOUNT -->
+
+            <div
+                class="settings-section active"
+                id="account"
+            >
+
+                <div class="settings-section-heading">
+                    <h2>Account Information</h2>
+
+                    <p>
+                        Update the basic information associated with your SkillSwap account.
+                    </p>
+                </div>
+
+
+                <div class="settings-card">
+
+                    <div class="settings-card-title">
+                        <div>
+                            <h3>Personal information</h3>
+                            <p>Your profile details</p>
+                        </div>
+
+                        <span class="settings-badge">
+                            PROFILE
+                        </span>
+                    </div>
+
+
+                    <div class="settings-form-grid">
+
+                        <div class="settings-field">
+                            <label>Full Name</label>
+
+                            <input
+                                type="text"
+                                value="Student"
+                                id="fullName"
+                            >
+                        </div>
+
+
+                        <div class="settings-field">
+                            <label>Email Address</label>
+
+                            <input
+                                type="email"
+                                value="student@example.com"
+                                id="emailAddress"
+                            >
+                        </div>
+
+
+                        <div class="settings-field">
+                            <label>Course</label>
+
+                            <input
+                                type="text"
+                                value="Computer Science Engineering"
+                            >
+                        </div>
+
+
+                        <div class="settings-field">
+                            <label>College</label>
+
+                            <input
+                                type="text"
+                                value="Mumbai University"
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-card-footer">
+
+                        <span class="settings-save-status" id="accountStatus">
+                            Changes are saved locally for now.
+                        </span>
+
+                        <button
+                            class="settings-primary-btn"
+                            onclick="saveAccount()"
+                        >
+                            Save Changes
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card danger-card">
+
+                    <div class="settings-card-title">
+
+                        <div>
+                            <h3>Account actions</h3>
+
+                            <p>
+                                Manage your account access.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="settings-danger-btn"
+                        onclick="logoutUser()"
+                    >
+                        Log out of SkillSwap
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECURITY -->
+
+            <div
+                class="settings-section"
+                id="security"
+            >
+
+                <div class="settings-section-heading">
+
+                    <h2>Security</h2>
+
+                    <p>
+                        Keep your account protected with secure login settings.
+                    </p>
+
+                </div>
+
+
+                <div class="settings-card">
+
+                    <div class="settings-card-title">
+
+                        <div>
+                            <h3>Change Password</h3>
+
+                            <p>
+                                Create a strong password for your account.
+                            </p>
+                        </div>
+
+                        <span class="settings-security-icon">
+                            🔒
+                        </span>
+
+                    </div>
+
+
+                    <div class="settings-form">
+
+                        <div class="settings-field">
+
+                            <label>Current Password</label>
+
+                            <input
+                                type="password"
+                                placeholder="Enter current password"
+                            >
+
+                        </div>
+
+
+                        <div class="settings-field">
+
+                            <label>New Password</label>
+
+                            <input
+                                type="password"
+                                placeholder="Enter new password"
+                            >
+
+                        </div>
+
+
+                        <div class="settings-field">
+
+                            <label>Confirm New Password</label>
+
+                            <input
+                                type="password"
+                                placeholder="Confirm new password"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-card-footer">
+
+                        <span class="settings-save-status">
+                            Use at least 8 characters.
+                        </span>
+
+                        <button
+                            class="settings-primary-btn"
+                            onclick="changePassword()"
+                        >
+                            Update Password
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card">
+
+                    <div class="settings-card-title">
+
+                        <div>
+                            <h3>Login security</h3>
+
+                            <p>
+                                Additional security options.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>Login notifications</strong>
+
+                            <p>
+                                Get notified when a new login occurs.
+                            </p>
+
+                        </div>
+
+                        <label class="toggle">
+
+                            <input
+                                type="checkbox"
+                                checked
+                            >
+
+                            <span class="toggle-slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- NOTIFICATIONS -->
+
+            <div
+                class="settings-section"
+                id="notifications"
+            >
+
+                <div class="settings-section-heading">
+
+                    <h2>Notification Preferences</h2>
+
+                    <p>
+                        Choose what activity you want to be notified about.
+                    </p>
+
+                </div>
+
+
+                <div class="settings-card">
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>Skill requests</strong>
+
+                            <p>
+                                Notify me when someone sends a skill request.
+                            </p>
+
+                        </div>
+
+                        <label class="toggle">
+
+                            <input
+                                type="checkbox"
+                                checked
+                            >
+
+                            <span class="toggle-slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>New messages</strong>
+
+                            <p>
+                                Notify me when someone sends a message.
+                            </p>
+
+                        </div>
+
+                        <label class="toggle">
+
+                            <input
+                                type="checkbox"
+                                checked
+                            >
+
+                            <span class="toggle-slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>Session reminders</strong>
+
+                            <p>
+                                Receive reminders before learning sessions.
+                            </p>
+
+                        </div>
+
+                        <label class="toggle">
+
+                            <input
+                                type="checkbox"
+                                checked
+                            >
+
+                            <span class="toggle-slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>Connection updates</strong>
+
+                            <p>
+                                Get updates about accepted requests and connections.
+                            </p>
+
+                        </div>
+
+                        <label class="toggle">
+
+                            <input
+                                type="checkbox"
+                                checked
+                            >
+
+                            <span class="toggle-slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>Email notifications</strong>
+
+                            <p>
+                                Receive important account updates by email.
+                            </p>
+
+                        </div>
+
+                        <label class="toggle">
+
+                            <input
+                                type="checkbox"
+                            >
+
+                            <span class="toggle-slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- APPEARANCE -->
+
+            <div
+                class="settings-section"
+                id="appearance"
+            >
+
+                <div class="settings-section-heading">
+
+                    <h2>Appearance</h2>
+
+                    <p>
+                        Customize how SkillSwap looks on your device.
+                    </p>
+
+                </div>
+
+
+                <div class="settings-card">
+
+                    <div class="settings-card-title">
+
+                        <div>
+                            <h3>Theme</h3>
+
+                            <p>
+                                Choose your preferred appearance.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="theme-options">
+
+                        <button
+                            class="theme-option active"
+                            onclick="selectTheme(this, 'light')"
+                        >
+
+                            <div class="theme-preview light-preview">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+
+                            <strong>Light</strong>
+
+                            <span>Clean and bright</span>
+
+                        </button>
+
+
+                        <button
+                            class="theme-option"
+                            onclick="selectTheme(this, 'dark')"
+                        >
+
+                            <div class="theme-preview dark-preview">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+
+                            <strong>Dark</strong>
+
+                            <span>Easy on the eyes</span>
+
+                        </button>
+
+
+                        <button
+                            class="theme-option"
+                            onclick="selectTheme(this, 'system')"
+                        >
+
+                            <div class="theme-preview system-preview">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+
+                            <strong>System</strong>
+
+                            <span>Follow device</span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRIVACY -->
+
+            <div
+                class="settings-section"
+                id="privacy"
+            >
+
+                <div class="settings-section-heading">
+
+                    <h2>Privacy</h2>
+
+                    <p>
+                        Control how other students can interact with your profile.
+                    </p>
+
+                </div>
+
+
+                <div class="settings-card">
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>Public profile</strong>
+
+                            <p>
+                                Allow other students to discover your profile.
+                            </p>
+
+                        </div>
+
+                        <label class="toggle">
+
+                            <input
+                                type="checkbox"
+                                checked
+                            >
+
+                            <span class="toggle-slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>Show online status</strong>
+
+                            <p>
+                                Let connections know when you are online.
+                            </p>
+
+                        </div>
+
+                        <label class="toggle">
+
+                            <input
+                                type="checkbox"
+                                checked
+                            >
+
+                            <span class="toggle-slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <div class="settings-option-row">
+
+                        <div>
+
+                            <strong>Allow skill requests</strong>
+
+                            <p>
+                                Let other students send you learning requests.
+                            </p>
+
+                        </div>
+
+                        <label class="toggle">
+
+                            <input
+                                type="checkbox"
+                                checked
+                            >
+
+                            <span class="toggle-slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="settings-card privacy-note">
+
+                    <div class="privacy-note-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>Your privacy matters</strong>
+
+                        <p>
+                            Your personal information should only be shared
+                            according to your account preferences.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<script> 
+if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+
+    const settingsMenus =
+        document.querySelectorAll(".settings-menu[data-section]");
+
+    const settingsSections =
+        document.querySelectorAll(".settings-section");
+
+
+    settingsMenus.forEach(menu => {
+
+        menu.addEventListener("click", () => {
+
+            const sectionName =
+                menu.dataset.section;
+
+            settingsMenus.forEach(item => {
+                item.classList.remove("active");
+            });
+
+            menu.classList.add("active");
+
+            settingsSections.forEach(section => {
+                section.classList.remove("active");
+            });
+
+            const selectedSection =
+                document.getElementById(sectionName);
+
+            if (selectedSection) {
+                selectedSection.classList.add("active");
+            }
+
+        });
+
+    });
+
+
+    function saveAccount() {
+
+        const status =
+            document.getElementById("accountStatus");
+
+        status.textContent =
+            "✓ Changes saved successfully.";
+
+        status.classList.add("success");
+
+        setTimeout(() => {
+
+            status.textContent =
+                "Changes are saved locally for now.";
+
+            status.classList.remove("success");
+
+        }, 3000);
+
+    }
+
+
+    function changePassword() {
+
+        alert(
+            "Password update will be connected to Ganesh's backend API later."
+        );
+
+    }
+
+
+    function selectTheme(button, theme) {
+
+        document
+            .querySelectorAll(".theme-option")
+            .forEach(option => {
+                option.classList.remove("active");
+            });
+
+        button.classList.add("active");
+
+        if (theme === "dark") {
+
+            alert(
+                "Dark mode UI can be connected to the final theme system later."
+            );
+
+        }
+
+        else if (theme === "system") {
+
+            alert(
+                "System theme detection can be connected later."
+            );
+
+        }
+
+    }
+
+
+    function logoutUser() {
+
+        const confirmLogout =
+            confirm("Are you sure you want to log out?");
+
+        if (confirmLogout) {
+
+            window.location.href = "login.html";
+
+        }
+
+    }
+ 
+ const navUserButton = document.getElementById("navUserButton");
+const userDropdown = document.getElementById("userDropdown");
+
+navUserButton.addEventListener("click", function(event) {
+    event.stopPropagation();
+    userDropdown.classList.toggle("show");
+});
+
+document.addEventListener("click", function(event) {
+    if (
+        !navUserButton.contains(event.target) &&
+        !userDropdown.contains(event.target)
+    ) {
+        userDropdown.classList.remove("show");
+    }
+});
+
+function logoutUser() {
+
+    const confirmLogout =
+        confirm("Are you sure you want to log out?");
+
+    if (confirmLogout) {
+
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+
+        window.location.href = "login.html";
+    }
+
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1606 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Discover | skillswap</title>
+
+    <!-- Existing skillswap stylesheet -->
+    <link rel="stylesheet" href="frontend\css/style.css">
+
+    <!-- Premium font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="discover-body">
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="dashboard-navbar">
+
+      
+<div class="logo">
+    <img src="images/skillswap-logo.png" alt="SkillSwap">
+</div>
+
+
+        <nav class="dashboard-nav">
+
+            <a href="dashboard.html" class="nav-link">
+                <span class="nav-icon">⌂</span>
+                Home
+            </a>
+
+            <a href="profile.html" class="nav-link">
+                <span class="nav-icon">◎</span>
+                Profile
+            </a>
+
+            <a href="discover.html" class="nav-link active">
+                <span class="nav-icon">⌕</span>
+                Discover
+            </a>
+
+            <a href="requests.html" class="nav-link">
+                <span class="nav-icon">♧</span>
+                Requests
+            </a>
+
+            <a href="chat.html" class="nav-link">
+                <span class="nav-icon">◌</span>
+                Chat 
+
+               
+<a href="sessions.html" class="nav-link">
+    <span class="nav-icon">📅</span>
+    Sessions
+</a> 
+
+
+<a href="reviews.html" class="nav-link">
+    <span class="nav-icon">★</span>
+    Reviews
+</a>
+
+
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <button
+    class="notification-btn"
+    title="Notifications"
+    onclick="window.location.href='notifications.html'"
+>
+    ♧
+    <span class="notification-dot"></span>
+</button>
+
+            <div class="nav-divider"></div>
+
+            <div class="nav-user-wrapper">
+
+    <button class="nav-user" id="navUserButton">
+
+        <div class="avatar">
+            A
+        </div>
+
+        <div class="nav-user-info">
+            <strong>Student</strong>
+            <span>CSE Student</span>
+        </div>
+
+        <span class="nav-chevron">⌄</span>
+
+    </button>
+
+
+    <div class="user-dropdown" id="userDropdown">
+
+        <a href="profile.html" class="user-dropdown-item">
+            <span>◎</span>
+
+            <div>
+                <strong>Profile</strong>
+                <small>View your profile</small>
+            </div>
+        </a>
+
+
+        <a href="settings.html" class="user-dropdown-item">
+            <span>⚙</span>
+
+            <div>
+                <strong>Settings</strong>
+                <small>Manage your account</small>
+            </div>
+        </a>
+
+
+        <div class="user-dropdown-divider"></div>
+
+
+        <button
+            class="user-dropdown-item logout-dropdown"
+            onclick="logoutUser()"
+        >
+            <span>↪</span>
+
+            <div>
+                <strong>Logout</strong>
+                <small>Sign out of skillswap</small>
+            </div>
+        </button>
+
+    </div>
+
+</div>
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN DISCOVER PAGE
+         ===================================================== -->
+
+    <main class="discover-page">
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="discover-hero">
+
+            <div class="hero-text">
+
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    CAMPUS SKILL COMMUNITY
+                </div>
+
+                <h1>
+                    Learn from someone.
+                    <br>
+                    <span>Share what you know.</span>
+                </h1>
+
+                <p>
+                    Discover talented students on your campus,
+                    connect with them and exchange knowledge.
+                </p>
+
+            </div>
+
+            <div class="hero-stat">
+
+                <div class="hero-stat-icon">
+                    ✦
+                </div>
+
+                <div>
+                    <strong>1,240+</strong>
+                    <span>Skills shared</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SEARCH & FILTERS
+             ================================================= -->
+
+        <section class="discover-controls">
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search students, skills or interests..."
+                    autocomplete="off"
+                >
+
+                <span class="search-shortcut">
+                    /
+                </span>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <select id="skillFilter">
+
+                    <option value="all">
+                        All Skills
+                    </option>
+
+                    <option value="java">
+                        Java
+                    </option>
+
+                    <option value="python">
+                        Python
+                    </option>
+
+                    <option value="web">
+                        Web Development
+                    </option>
+
+                    <option value="c">
+                        C / C++
+                    </option>
+
+                    <option value="design">
+                        UI/UX Design
+                    </option>
+
+                    <option value="data">
+                        Data Science
+                    </option>
+
+                    <option value="dsa">
+                        DSA
+                    </option>
+
+                </select>
+
+
+                <select id="sortFilter">
+
+                    <option value="recommended">
+                        Recommended
+                    </option>
+
+                    <option value="rating">
+                        Highest Rated
+                    </option>
+
+                    <option value="name">
+                        Name A-Z
+                    </option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             QUICK FILTERS
+             ================================================= -->
+
+        <section class="quick-filters">
+
+            <span class="quick-label">
+                Popular:
+            </span>
+
+            <button class="quick-filter active" data-filter="all">
+                All
+            </button>
+
+            <button class="quick-filter" data-filter="java">
+                Java
+            </button>
+
+            <button class="quick-filter" data-filter="python">
+                Python
+            </button>
+
+            <button class="quick-filter" data-filter="web">
+                Web Development
+            </button>
+
+            <button class="quick-filter" data-filter="design">
+                UI/UX
+            </button>
+
+            <button class="quick-filter" data-filter="dsa">
+                DSA
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             RESULTS HEADER
+             ================================================= -->
+
+        <section class="results-heading">
+
+            <div>
+
+                <span class="section-eyebrow">
+                    DISCOVER PEOPLE
+                </span>
+
+                <h2>
+                    Students you may like
+                </h2>
+
+                <p>
+                    Based on skills and interests.
+                </p>
+
+            </div>
+
+            <div class="results-count">
+                <strong id="resultCount">6</strong>
+                <span>students found</span>
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             STUDENT GRID
+             ================================================= -->
+
+        <section class="student-grid" id="studentGrid">
+
+
+            <!-- ================= STUDENT 1 ================= -->
+
+            <article
+                class="student-card"
+                data-name="Rahul Sharma"
+                data-skills="java python dsa"
+                data-rating="4.9"
+            >
+
+                <div class="card-top">
+
+                    <div class="student-avatar avatar-purple">
+                        RS
+                    </div>
+
+                    <span class="online-status">
+                        <span></span>
+                        Online
+                    </span>
+
+                    <button class="more-btn">
+                        ⋯
+                    </button>
+
+                </div>
+
+
+                <div class="student-info">
+
+                    <h3>
+                        Rahul Sharma
+                    </h3>
+
+                    <p class="student-course">
+                        CSE • 2nd Year
+                    </p>
+
+                    <div class="student-rating">
+                        <span>★</span>
+                        <strong>4.9</strong>
+                        <small>· 18 sessions</small>
+                    </div>
+
+                </div>
+
+
+                <div class="skill-tags">
+
+                    <span>Java</span>
+                    <span>Python</span>
+                    <span>DSA</span>
+
+                </div>
+
+
+                <p class="student-bio">
+                    I enjoy helping students understand
+                    programming concepts and build strong
+                    fundamentals.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <button
+                        class="view-profile-btn"
+                        onclick="viewProfile('Rahul Sharma')"
+                    >
+                        View Profile
+                    </button>
+
+                    <button
+                        class="request-btn"
+                        onclick="sendRequest(this)"
+                    >
+                        Send Request
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- ================= STUDENT 2 ================= -->
+
+            <article
+                class="student-card"
+                data-name="Priya Patil"
+                data-skills="web design ui"
+                data-rating="4.8"
+            >
+
+                <div class="card-top">
+
+                    <div class="student-avatar avatar-pink">
+                        PP
+                    </div>
+
+                    <span class="online-status">
+                        <span></span>
+                        Online
+                    </span>
+
+                    <button class="more-btn">
+                        ⋯
+                    </button>
+
+                </div>
+
+
+                <div class="student-info">
+
+                    <h3>
+                        Priya Patil
+                    </h3>
+
+                    <p class="student-course">
+                        IT • 2nd Year
+                    </p>
+
+                    <div class="student-rating">
+                        <span>★</span>
+                        <strong>4.8</strong>
+                        <small>· 24 sessions</small>
+                    </div>
+
+                </div>
+
+
+                <div class="skill-tags">
+
+                    <span>Web Development</span>
+                    <span>UI/UX</span>
+
+                </div>
+
+
+                <p class="student-bio">
+                    I love creating modern websites and
+                    designing clean, user-friendly interfaces.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <button
+                        class="view-profile-btn"
+                        onclick="viewProfile('Priya Patil')"
+                    >
+                        View Profile
+                    </button>
+
+                    <button
+                        class="request-btn"
+                        onclick="sendRequest(this)"
+                    >
+                        Send Request
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- ================= STUDENT 3 ================= -->
+
+            <article
+                class="student-card"
+                data-name="Aman Khan"
+                data-skills="c cpp java dsa"
+                data-rating="4.7"
+            >
+
+                <div class="card-top">
+
+                    <div class="student-avatar avatar-blue">
+                        AK
+                    </div>
+
+                    <span class="online-status offline">
+                        <span></span>
+                        Offline
+                    </span>
+
+                    <button class="more-btn">
+                        ⋯
+                    </button>
+
+                </div>
+
+
+                <div class="student-info">
+
+                    <h3>
+                        Aman Khan
+                    </h3>
+
+                    <p class="student-course">
+                        CSE • 3rd Year
+                    </p>
+
+                    <div class="student-rating">
+                        <span>★</span>
+                        <strong>4.7</strong>
+                        <small>· 31 sessions</small>
+                    </div>
+
+                </div>
+
+
+                <div class="skill-tags">
+
+                    <span>C / C++</span>
+                    <span>Java</span>
+                    <span>DSA</span>
+
+                </div>
+
+
+                <p class="student-bio">
+                    I can help with programming, DSA and
+                    problem solving for engineering students.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <button
+                        class="view-profile-btn"
+                        onclick="viewProfile('Aman Khan')"
+                    >
+                        View Profile
+                    </button>
+
+                    <button
+                        class="request-btn"
+                        onclick="sendRequest(this)"
+                    >
+                        Send Request
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- ================= STUDENT 4 ================= -->
+
+            <article
+                class="student-card"
+                data-name="Sneha Joshi"
+                data-skills="python data machine"
+                data-rating="4.9"
+            >
+
+                <div class="card-top">
+
+                    <div class="student-avatar avatar-green">
+                        SJ
+                    </div>
+
+                    <span class="online-status">
+                        <span></span>
+                        Online
+                    </span>
+
+                    <button class="more-btn">
+                        ⋯
+                    </button>
+
+                </div>
+
+
+                <div class="student-info">
+
+                    <h3>
+                        Sneha Joshi
+                    </h3>
+
+                    <p class="student-course">
+                        CSE • 3rd Year
+                    </p>
+
+                    <div class="student-rating">
+                        <span>★</span>
+                        <strong>4.9</strong>
+                        <small>· 27 sessions</small>
+                    </div>
+
+                </div>
+
+
+                <div class="skill-tags">
+
+                    <span>Python</span>
+                    <span>Data Science</span>
+
+                </div>
+
+
+                <p class="student-bio">
+                    Interested in Python, data analysis and
+                    helping others explore machine learning.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <button
+                        class="view-profile-btn"
+                        onclick="viewProfile('Sneha Joshi')"
+                    >
+                        View Profile
+                    </button>
+
+                    <button
+                        class="request-btn"
+                        onclick="sendRequest(this)"
+                    >
+                        Send Request
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- ================= STUDENT 5 ================= -->
+
+            <article
+                class="student-card"
+                data-name="Aditya Mehta"
+                data-skills="web java javascript"
+                data-rating="4.6"
+            >
+
+                <div class="card-top">
+
+                    <div class="student-avatar avatar-orange">
+                        AM
+                    </div>
+
+                    <span class="online-status">
+                        <span></span>
+                        Online
+                    </span>
+
+                    <button class="more-btn">
+                        ⋯
+                    </button>
+
+                </div>
+
+
+                <div class="student-info">
+
+                    <h3>
+                        Aditya Mehta
+                    </h3>
+
+                    <p class="student-course">
+                        CSE • 2nd Year
+                    </p>
+
+                    <div class="student-rating">
+                        <span>★</span>
+                        <strong>4.6</strong>
+                        <small>· 15 sessions</small>
+                    </div>
+
+                </div>
+
+
+                <div class="skill-tags">
+
+                    <span>Web Development</span>
+                    <span>Java</span>
+
+                </div>
+
+
+                <p class="student-bio">
+                    Full-stack enthusiast who enjoys building
+                    useful web applications from scratch.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <button
+                        class="view-profile-btn"
+                        onclick="viewProfile('Aditya Mehta')"
+                    >
+                        View Profile
+                    </button>
+
+                    <button
+                        class="request-btn"
+                        onclick="sendRequest(this)"
+                    >
+                        Send Request
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- ================= STUDENT 6 ================= -->
+
+            <article
+                class="student-card"
+                data-name="Neha Kulkarni"
+                data-skills="design ui python"
+                data-rating="4.8"
+            >
+
+                <div class="card-top">
+
+                    <div class="student-avatar avatar-indigo">
+                        NK
+                    </div>
+
+                    <span class="online-status offline">
+                        <span></span>
+                        Offline
+                    </span>
+
+                    <button class="more-btn">
+                        ⋯
+                    </button>
+
+                </div>
+
+
+                <div class="student-info">
+
+                    <h3>
+                        Neha Kulkarni
+                    </h3>
+
+                    <p class="student-course">
+                        AI & DS • 2nd Year
+                    </p>
+
+                    <div class="student-rating">
+                        <span>★</span>
+                        <strong>4.8</strong>
+                        <small>· 21 sessions</small>
+                    </div>
+
+                </div>
+
+
+                <div class="skill-tags">
+
+                    <span>UI/UX Design</span>
+                    <span>Python</span>
+
+                </div>
+
+
+                <p class="student-bio">
+                    I enjoy UI design and helping students
+                    learn Python through practical projects.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <button
+                        class="view-profile-btn"
+                        onclick="viewProfile('Neha Kulkarni')"
+                    >
+                        View Profile
+                    </button>
+
+                    <button
+                        class="request-btn"
+                        onclick="sendRequest(this)"
+                    >
+                        Send Request
+                    </button>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================================
+             EMPTY STATE
+             ================================================= -->
+
+        <section
+            class="discover-empty"
+            id="emptyState"
+        >
+
+            <div class="empty-icon">
+                ⌕
+            </div>
+
+            <h3>
+                No students found
+            </h3>
+
+            <p>
+                Try searching for another skill or student.
+            </p>
+
+            <button onclick="clearFilters()">
+                Clear Filters
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             LOADING STATE
+             For future API integration
+             ================================================= -->
+
+        <section
+            class="discover-loading"
+            id="loadingState"
+        >
+
+            <div class="loading-spinner"></div>
+
+            <p>
+                Finding students...
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+ <script src="api.js"></script> 
+    <script>  
+
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+        const skillFilter =
+            document.getElementById("skillFilter");
+
+        const sortFilter =
+            document.getElementById("sortFilter");
+
+        const studentGrid =
+            document.getElementById("studentGrid");
+
+        let studentCards =
+            Array.from(
+                document.querySelectorAll(".student-card")
+            );
+
+        const resultCount =
+            document.getElementById("resultCount");
+
+        const emptyState =
+            document.getElementById("emptyState");
+
+
+        /* ================================================
+           SEARCH + FILTER
+           ================================================ */
+
+        function filterStudents() {
+
+            const search =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+            const selectedSkill =
+                skillFilter.value.toLowerCase();
+
+            let visibleCards = [];
+
+
+            studentCards.forEach(card => {
+
+                const name =
+                    card.dataset.name.toLowerCase();
+
+                const skills =
+                    card.dataset.skills.toLowerCase();
+
+
+                const matchesSearch =
+                    name.includes(search) ||
+                    skills.includes(search);
+
+
+                const matchesSkill =
+                    selectedSkill === "all" ||
+                    skills.includes(selectedSkill);
+
+
+                if (matchesSearch && matchesSkill) {
+
+                    card.style.display = "block";
+
+                    visibleCards.push(card);
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+
+            resultCount.textContent =
+                visibleCards.length;
+
+
+            if (visibleCards.length === 0) {
+
+                emptyState.style.display = "flex";
+
+            } else {
+
+                emptyState.style.display = "none";
+
+            }
+
+        }
+
+
+        /* ================================================
+           SORTING
+           ================================================ */
+
+        function sortStudents() {
+
+            const sortType =
+                sortFilter.value;
+
+
+            const cards =
+                Array.from(
+                    document.querySelectorAll(".student-card")
+                );
+
+
+            if (sortType === "rating") {
+
+                cards.sort(
+                    (a, b) =>
+                        Number(b.dataset.rating) -
+                        Number(a.dataset.rating)
+                );
+
+            }
+
+
+            if (sortType === "name") {
+
+                cards.sort(
+                    (a, b) =>
+                        a.dataset.name.localeCompare(
+                            b.dataset.name
+                        )
+                );
+
+            }
+
+
+            cards.forEach(card => {
+
+                studentGrid.appendChild(card);
+
+            });
+
+        }
+
+
+        /* ================================================
+           QUICK FILTER BUTTONS
+           ================================================ */
+
+        const quickFilters =
+            document.querySelectorAll(".quick-filter");
+
+
+        quickFilters.forEach(button => {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    quickFilters.forEach(btn => {
+                        btn.classList.remove("active");
+                    });
+
+                    this.classList.add("active");
+
+
+                    const filter =
+                        this.dataset.filter;
+
+
+                    skillFilter.value =
+                        filter;
+
+
+                    filterStudents();
+
+                }
+            );
+
+        });
+
+
+        /* ================================================
+           SEARCH EVENTS
+           ================================================ */
+
+        searchInput.addEventListener(
+            "input",
+            filterStudents
+        );
+
+
+        skillFilter.addEventListener(
+            "change",
+            filterStudents
+        );
+
+
+        sortFilter.addEventListener(
+            "change",
+            sortStudents
+        );
+
+
+        /* ================================================
+           KEYBOARD SHORTCUT
+           Press "/" to search
+           ================================================ */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "/" &&
+                    document.activeElement !== searchInput
+                ) {
+
+                    event.preventDefault();
+
+                    searchInput.focus();
+
+                }
+
+            }
+        );
+
+
+        /* ================================================
+           SEND REQUEST
+           ================================================ */
+
+       function sendRequest(button) {
+
+    const card = button.closest(".student-card");
+
+    if (!card) return;
+
+    const studentName = card.dataset.name;
+
+    let sentRequests =
+        JSON.parse(localStorage.getItem("sentRequests")) || [];
+
+    // Prevent duplicate request
+    if (!sentRequests.includes(studentName)) {
+
+        sentRequests.push(studentName);
+
+        localStorage.setItem(
+            "sentRequests",
+            JSON.stringify(sentRequests)
+        );
+    }
+
+    button.textContent = "Request Sent ✓";
+
+    button.classList.add("request-sent");
+
+    button.disabled = true;
+}   
+
+function restoreSentRequests() {
+
+    const sentRequests =
+        JSON.parse(localStorage.getItem("sentRequests")) || [];
+
+    const cards =
+        document.querySelectorAll(".student-card");
+
+    cards.forEach(card => {
+
+        const studentName =
+            card.dataset.name;
+
+        const button =
+            card.querySelector(".request-btn");
+
+        if (
+            button &&
+            sentRequests.includes(studentName)
+        ) {
+
+            button.textContent =
+                "Request Sent ✓";
+
+            button.classList.add(
+                "request-sent"
+            );
+
+            button.disabled = true;
+        }
+    });
+}
+
+
+        /* ================================================
+           VIEW PROFILE
+           ================================================ */
+
+        function viewProfile(name) {
+
+            alert(
+                "Student profile for " +
+                name +
+                " will open here."
+            );
+
+        }
+
+
+        /* ================================================
+           CLEAR FILTERS
+           ================================================ */
+
+        function clearFilters() {
+
+            searchInput.value = "";
+
+            skillFilter.value = "all";
+
+            sortFilter.value = "recommended";
+
+
+            quickFilters.forEach(btn => {
+
+                btn.classList.remove("active");
+
+            });
+
+
+            quickFilters[0].classList.add("active");
+
+
+            filterStudents();
+
+        }
+
+
+        /* ================================================
+           INITIAL STATE
+           ================================================ */
+
+        emptyState.style.display = "none"; 
+
+        // ================================================
+// LOAD USERS FROM API DATA LAYER
+// ================================================
+async function loadDiscoverUsers() {
+    try {
+        const currentUserId = Number(localStorage.getItem("userId"));
+
+        // Get all real users from backend
+        const users = await getUsers();
+
+        // Don't show the currently logged-in user
+        const otherUsers = users.filter(
+            user => Number(user.id) !== currentUserId
+        );
+
+        console.log("Real Discover users:", otherUsers);
+
+        // Clear dummy cards
+        studentGrid.innerHTML = "";
+
+        // No other users
+        if (otherUsers.length === 0) {
+            resultCount.textContent = "0";
+            emptyState.style.display = "flex";
+            studentCards = [];
+            return;
+        }
+
+        // Load skills for every user
+        const usersWithSkills = await Promise.all(
+            otherUsers.map(async user => {
+                try {
+                    const userSkills = await getUserSkills(user.id);
+
+                    return {
+                        ...user,
+                        userSkills: userSkills || []
+                    };
+
+                } catch (error) {
+                    console.error(
+                        "Could not load skills for user:",
+                        user.id,
+                        error
+                    );
+
+                    return {
+                        ...user,
+                        userSkills: []
+                    };
+                }
+            })
+        );
+
+        // Create cards for real users
+        usersWithSkills.forEach(user => {
+
+            // Only skills that this user can TEACH
+            const teachSkills = user.userSkills.filter(
+                item => item.skillType === "TEACH"
+            );
+
+            // Get skill names
+            const skillNames = teachSkills
+                .map(item => item.skill?.name)
+                .filter(Boolean);
+
+            // First teaching skill
+            const firstSkill = teachSkills[0];
+
+            // Create card
+            const card = document.createElement("article");
+
+            card.className = "student-card";
+
+            // Data used by search/filter/request
+            card.dataset.name = user.name || "Student";
+
+            card.dataset.skills = skillNames
+                .join(" ")
+                .toLowerCase();
+
+            card.dataset.rating = "0";
+
+            card.dataset.userId = user.id;
+
+            card.dataset.skillId =
+                firstSkill?.skill?.id || "";
+
+            // Generate initials
+            const initials = (user.name || "S")
+                .split(" ")
+                .map(part => part.charAt(0))
+                .join("")
+                .substring(0, 2)
+                .toUpperCase();
+
+            // Card HTML
+            card.innerHTML = `
+                <div class="card-top">
+
+                    <div class="student-avatar avatar-purple">
+                        ${initials}
+                    </div>
+
+                    <span class="online-status">
+                        <span></span>Available
+                    </span>
+
+                    <button class="more-btn">⋯</button>
+
+                </div>
+
+                <div class="student-info">
+
+                    <h3>
+                        ${escapeHTML(user.name || "Student")}
+                    </h3>
+
+                    <p class="student-course">
+                        skillswap Member
+                    </p>
+
+                    <div class="student-rating">
+
+                        <span>★</span>
+
+                        <strong>New</strong>
+
+                        <small>
+                            · New member
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="skill-tags">
+
+                    ${
+                        skillNames.length > 0
+                            ? skillNames
+                                .map(
+                                    skill =>
+                                        `<span>${escapeHTML(skill)}</span>`
+                                )
+                                .join("")
+                            : `<span>No teaching skills added</span>`
+                    }
+
+                </div>
+
+                <p class="student-bio">
+
+                    ${
+                        skillNames.length > 0
+                            ? `Can teach ${escapeHTML(
+                                  skillNames.join(", ")
+                              )}.`
+                            : "This student has not added teaching skills yet."
+                    }
+
+                </p>
+
+                <div class="card-footer">
+
+                    <button
+                        class="view-profile-btn"
+                        onclick="viewProfileById(${user.id})"
+                    >
+                        View Profile
+                    </button>
+
+                    <button
+                        class="request-btn"
+                        onclick="sendRealRequest(this)"
+                        ${firstSkill ? "" : "disabled"}
+                    >
+                        ${
+                            firstSkill
+                                ? "Send Request"
+                                : "No Skill Available"
+                        }
+                    </button>
+
+                </div>
+            `;
+
+            studentGrid.appendChild(card);
+        });
+
+        // Refresh the student card list
+        studentCards = Array.from(
+            document.querySelectorAll(".student-card")
+        );
+
+        // Update result count
+        resultCount.textContent = studentCards.length;
+
+        // Hide empty state
+        emptyState.style.display = "none";
+
+        console.log(
+            "Real Discover users loaded successfully."
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Failed to load Discover users:",
+            error
+        );
+
+        studentGrid.innerHTML = "";
+
+        studentCards = [];
+
+        resultCount.textContent = "0";
+
+        emptyState.style.display = "flex";
+    }
+}  
+
+async function sendRealRequest(button) {
+
+    const card = button.closest(".student-card");
+
+    if (!card) return;
+
+    const receiverId = card.dataset.userId;
+
+    const skillId = card.dataset.skillId;
+
+    if (!receiverId || !skillId) {
+
+        alert(
+            "This student has not added a skill they can teach yet."
+        );
+
+        return;
+    }
+
+    button.disabled = true;
+
+    button.textContent = "Sending...";
+
+    try {
+
+        await sendSkillRequest(
+            receiverId,
+            skillId
+        );
+
+        button.textContent = "Request Sent ✓";
+
+        button.classList.add("request-sent");
+
+        alert(
+            "Skill request sent successfully!"
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Failed to send skill request:",
+            error
+        );
+
+        alert(
+            "Could not send request: " +
+            error.message
+        );
+
+        button.disabled = false;
+
+        button.textContent = "Send Request";
+    }
+}    
+
+
+function viewProfileById(userId) {
+
+    localStorage.setItem(
+        "viewProfileUserId",
+        userId
+    );
+
+    alert(
+        "Student profile page will be connected next."
+    );
+}   
+
+function escapeHTML(value) {
+
+    const div = document.createElement("div");
+
+    div.textContent = value;
+
+    return div.innerHTML;
+}
+
+
+// Load users when page opens
+loadDiscoverUsers().then(() => {
+
+    filterStudents();
+
+    restoreSentRequests();
+
+});
+
+        const navUserButton = document.getElementById("navUserButton");
+const userDropdown = document.getElementById("userDropdown");
+
+if (navUserButton && userDropdown) {
+
+    navUserButton.addEventListener("click", function(event) {
+        event.stopPropagation();
+        userDropdown.classList.toggle("show");
+    });
+
+    document.addEventListener("click", function(event) {
+        if (
+            !navUserButton.contains(event.target) &&
+            !userDropdown.contains(event.target)
+        ) {
+            userDropdown.classList.remove("show");
+        }
+    });
+
+}
+
+function logoutUser() {
+
+    const confirmLogout =
+        confirm("Are you sure you want to log out?");
+
+    if (confirmLogout) {
+
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+
+        window.location.href = "login.html";
+    }
+}
+
+  
+
+    </script>
+
+</body>
+
+</html>

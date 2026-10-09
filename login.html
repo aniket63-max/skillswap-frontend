@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillSwap - Login</title>
+
+    <link rel="stylesheet" href="frontend\css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="premium-auth-body">
+
+    <div class="premium-auth">
+
+        <!-- LEFT BRANDING PANEL -->
+
+        <div class="auth-brand-panel">
+
+           <div class="logo">
+    <img src="images/skillswap-logo.png" alt="SkillSwap">
+</div>
+
+            <div class="brand-content">
+
+                <div class="brand-badge">
+                    ✦ STUDENT SKILL NETWORK
+                </div>
+
+                <h1>
+                    Learn from people.
+                    <br>
+                    <span>Share what you know.</span>
+                </h1>
+
+                <p>
+                    Connect with students who can teach you
+                    something new — and share your own skills
+                    with the community.
+                </p>
+
+                <div class="brand-features">
+
+                    <div>
+                        <span>✓</span>
+                        Learn from students
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Share your expertise
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Build meaningful connections
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="brand-footer">
+                Learn • Share • Connect
+            </div>
+
+        </div>
+
+
+        <!-- LOGIN AREA -->
+
+        <div class="auth-form-area">
+
+            <div class="premium-auth-card">
+
+                <div class="mobile-logo">
+    SkillSwap
+</div>
+
+                <div class="form-header">
+
+                    <div class="form-icon">
+                        🔐
+                    </div>
+
+                    <div>
+                        <h2>Welcome back</h2>
+
+                        <p>
+                            Sign in to continue to SkillSwap
+                        </p>
+                    </div>
+
+                </div>
+
+
+            <form onsubmit="validateLogin(event)">
+
+                    <label for="email">
+                        Email address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="you@example.com"
+                        required
+                    >
+
+
+                    <div class="password-label">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <a href="#">
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword()">
+
+                            👁
+
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="premium-login-btn">
+
+                        Sign in
+                        <span>→</span>
+
+                    </button>
+
+                </form>
+
+
+                <div class="premium-divider">
+                    <span>OR CONTINUE WITH</span>
+                </div>
+
+
+                <button
+                    type="button"
+                    class="premium-google-btn">
+
+                    <span class="google-symbol">
+                        G
+                    </span>
+
+                    Continue with Google
+
+                </button>
+
+
+                <p class="premium-bottom-text">
+
+                    Don't have an account?
+
+                    <a href="register.html">
+                        Create one
+                    </a>
+
+                </p>
+
+
+                <div class="security-note">
+
+                    🔒 Your information is securely protected
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<script src="api.js"></script>
+    <script> 
+    if (localStorage.getItem("isLoggedIn") === "true") {
+    window.location.href = "dashboard.html";
+}
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const button =
+                document.querySelector(".password-toggle");
+
+            if (password.type === "password") {
+
+                password.type = "text";
+                button.textContent = "🙈";
+
+            } else {
+
+                password.type = "password";
+                button.textContent = "👁";
+
+            }
+
+        }
+   
+       async function validateLogin(event) {
+
+    event.preventDefault();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    if (email === "") {
+        alert("Please enter your email address.");
+        return false;
+    }
+
+    const emailPattern =
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+    }
+
+    if (password === "") {
+        alert("Please enter your password.");
+        return false;
+    }
+
+    if (password.length < 8) {
+        alert("Password must contain at least 8 characters.");
+        return false;
+    }
+
+    try {
+
+        // Call Ganesh's backend login API
+        const response =
+            await loginUser(email, password);
+
+        // Backend returns:
+// {
+//     "token": "JWT_TOKEN",
+//     "userId": 4,
+//     "name": "Ganesh",
+//     "email": "ganesh@example.com"
+// }
+
+        if (!response || !response.token) {
+            alert("Login failed. Token was not received.");
+            return false;
+        }
+
+        // Save login information
+        localStorage.setItem(
+            "isLoggedIn",
+            "true"
+        );
+
+       localStorage.setItem(
+    "isLoggedIn",
+    "true"
+);
+
+localStorage.setItem(
+    "userEmail",
+    response.email
+);
+
+localStorage.setItem(
+    "token",
+    response.token
+);
+
+localStorage.setItem(
+    "userId",
+    response.userId
+);
+
+localStorage.setItem(
+    "userName",
+    response.name
+);
+
+        // Go to dashboard
+        window.location.href =
+            "dashboard.html";
+
+    } catch (error) {
+
+        console.error(
+            "Login error:",
+            error
+        );
+
+        alert(
+            "Login failed. Please check your email and password."
+        );
+    }
+
+    return false;
+}
+    </script>
+
+</body>
+
+</html>

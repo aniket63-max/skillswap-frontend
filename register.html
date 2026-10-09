@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillSwap - Create Account</title>
+
+    <link rel="stylesheet" href="frontend\css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="premium-auth-body">
+
+    <div class="premium-auth">
+
+        <!-- LEFT BRANDING PANEL -->
+
+        <div class="auth-brand-panel">
+
+           <div class="logo">
+    <img src="images/skillswap-logo.png" alt="SkillSwap">
+</div>
+
+            <div class="brand-content">
+
+                <div class="brand-badge">
+                    ✦ JOIN THE COMMUNITY
+                </div>
+
+                <h1>
+                    Your skills can
+                    <br>
+                    <span>take you further.</span>
+                </h1>
+
+                <p>
+                    Create your SkillSwap account and discover
+                    students who can help you learn, while sharing
+                    the knowledge you already have.
+                </p>
+
+                <div class="brand-features">
+
+                    <div>
+                        <span>✓</span>
+                        Create your student profile
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Discover useful skills
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Connect with other students
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="brand-footer">
+                Learn • Share • Connect
+            </div>
+
+        </div>
+
+
+        <!-- REGISTER AREA -->
+
+        <div class="auth-form-area">
+
+            <div class="premium-auth-card register-card">
+
+               <div class="mobile-logo">
+    SkillSwap
+</div>
+
+
+                <div class="form-header">
+
+                    <div class="form-icon">
+                        ✨
+                    </div>
+
+                    <div>
+
+                        <h2>Create account</h2>
+
+                        <p>
+                            Start your SkillSwap journey
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form onsubmit="return validateRegister(event)">
+
+                    <!-- NAME -->
+
+                    <label for="name">
+                        Full name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+
+                    <!-- EMAIL -->
+
+                    <label for="registerEmail">
+                        Email address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="you@example.com"
+                        required
+                    >
+
+
+                    <!-- PASSWORD -->
+
+                    <label for="registerPassword">
+                        Create password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="registerPassword"
+                            placeholder="Create a strong password"
+                            oninput="checkPasswordStrength()"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="toggleRegisterPassword()">
+                            👁
+                        </button>
+
+                    </div>
+
+
+                    <!-- PASSWORD STRENGTH -->
+
+                    <div class="password-strength">
+
+                        <div class="strength-bar">
+                            <div id="strengthFill"></div>
+                        </div>
+
+                        <span id="strengthText">
+                            Password strength
+                        </span>
+
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <label for="confirmPassword">
+                        Confirm password
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="toggleConfirmPassword()">
+                            👁
+                        </button>
+
+                    </div>
+
+
+                    <!-- TERMS -->
+
+                    <label class="terms-row">
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            required
+                        >
+
+                        <span>
+                            I agree to the
+                            <a href="#">Terms of Service</a>
+                            and
+                            <a href="#">Privacy Policy</a>.
+                        </span>
+
+                    </label>
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="premium-login-btn">
+
+                        Create my account
+                        <span>→</span>
+
+                    </button>
+
+                </form>
+
+
+                <div class="premium-divider">
+                    <span>OR CONTINUE WITH</span>
+                </div>
+
+
+                <!-- GOOGLE -->
+
+                <button
+                    type="button"
+                    class="premium-google-btn">
+
+                    <span class="google-symbol">
+                        G
+                    </span>
+
+                    Sign up with Google
+
+                </button>
+
+
+                <p class="premium-bottom-text">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Sign in
+                    </a>
+
+                </p>
+
+
+                <div class="security-note">
+
+                    🔒 Your information is securely protected
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<script src="api.js"></script>
+    <script>
+
+        function toggleRegisterPassword() {
+
+            const password =
+                document.getElementById("registerPassword");
+
+            const button =
+                password.parentElement.querySelector(
+                    ".password-toggle"
+                );
+
+            if (password.type === "password") {
+
+                password.type = "text";
+                button.textContent = "🙈";
+
+            } else {
+
+                password.type = "password";
+                button.textContent = "👁";
+
+            }
+
+        }
+
+
+        function toggleConfirmPassword() {
+
+            const password =
+                document.getElementById("confirmPassword");
+
+            const button =
+                password.parentElement.querySelector(
+                    ".password-toggle"
+                );
+
+            if (password.type === "password") {
+
+                password.type = "text";
+                button.textContent = "🙈";
+
+            } else {
+
+                password.type = "password";
+                button.textContent = "👁";
+
+            }
+
+        }
+
+
+        function checkPasswordStrength() {
+
+            const password =
+                document.getElementById("registerPassword").value;
+
+            const fill =
+                document.getElementById("strengthFill");
+
+            const text =
+                document.getElementById("strengthText");
+
+            let score = 0;
+
+            if (password.length >= 8) score++;
+
+            if (/[A-Z]/.test(password)) score++;
+
+            if (/[0-9]/.test(password)) score++;
+
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+
+
+            if (password.length === 0) {
+
+                fill.style.width = "0%";
+                text.textContent = "Password strength";
+
+            } else if (score <= 1) {
+
+                fill.style.width = "25%";
+                text.textContent = "Weak password";
+
+            } else if (score === 2) {
+
+                fill.style.width = "50%";
+                text.textContent = "Fair password";
+
+            } else if (score === 3) {
+
+                fill.style.width = "75%";
+                text.textContent = "Good password";
+
+            } else {
+
+                fill.style.width = "100%";
+                text.textContent = "Strong password";
+
+            }
+
+        }
+
+
+       async function validateRegister(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("registerEmail").value.trim();
+    const password = document.getElementById("registerPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    const terms = document.getElementById("terms").checked;
+
+    // 1. Check name
+    if (name.length < 3) {
+        alert("Please enter your full name.");
+        return false;
+    }
+
+    // 2. Check name characters
+    const namePattern = /^[A-Za-z ]+$/;
+
+    if (!namePattern.test(name)) {
+        alert("Name should contain only letters and spaces.");
+        return false;
+    }
+
+    // 3. Check email
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+    }
+
+    // 4. Check password length
+    if (password.length < 8) {
+        alert("Password must contain at least 8 characters.");
+        return false;
+    }
+
+    // 5. Check uppercase
+    if (!/[A-Z]/.test(password)) {
+        alert("Password must contain at least one uppercase letter.");
+        return false;
+    }
+
+    // 6. Check lowercase
+    if (!/[a-z]/.test(password)) {
+        alert("Password must contain at least one lowercase letter.");
+        return false;
+    }
+
+    // 7. Check number
+    if (!/[0-9]/.test(password)) {
+        alert("Password must contain at least one number.");
+        return false;
+    }
+
+    // 8. Check special character
+    if (!/[^A-Za-z0-9]/.test(password)) {
+        alert("Password must contain at least one special character.");
+        return false;
+    }
+
+    // 9. Check password confirmation
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return false;
+    }
+
+    // 10. Check terms
+    if (!terms) {
+        alert("Please agree to the Terms of Service and Privacy Policy.");
+        return false;
+    }
+
+    // ==========================================
+    // SEND REGISTRATION TO BACKEND
+    // ==========================================
+
+    try {
+
+        const response = await registerUser(name, email, password);
+
+        console.log("Registration successful:", response);
+
+        alert("Account created successfully! Please login.");
+
+        window.location.href = "login.html";
+
+    } catch (error) {
+
+        console.error("Registration error:", error);
+
+        alert("Registration failed: " + error.message);
+
+    }
+
+    return false;
+}
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <title>SkillSwap - Dashboard</title>
+
+    <link rel="stylesheet" href="frontend\css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <!-- NAVBAR -->
+    <header class="dashboard-navbar">
+
+   
+<div class="logo">
+    <img src="images/skillswap-logo.png" alt="SkillSwap">
+</div>
+
+
+    <nav class="dashboard-nav">
+
+        <a href="dashboard.html" class="nav-link">
+            <span class="nav-icon">⌂</span>
+            Home
+        </a>
+
+        <a href="profile.html" class="nav-link">
+            <span class="nav-icon">◎</span>
+            Profile
+        </a>
+
+        <a href="discover.html" class="nav-link">
+            <span class="nav-icon">⌕</span>
+            Discover
+        </a>
+
+        <a href="requests.html" class="nav-link">
+            <span class="nav-icon">♧</span>
+            Requests
+        </a>
+
+        <a href="chat.html" class="nav-link">
+            <span class="nav-icon">◌</span>
+            Chat
+        </a> 
+
+          <a href="sessions.html" class="nav-link">
+    <span class="nav-icon">📅</span>
+    Sessions
+</a> 
+
+ 
+<a href="reviews.html" class="nav-link">
+    <span class="nav-icon">★</span>
+    Reviews
+</a>
+
+
+    </nav>
+
+    <div class="nav-actions">
+
+        <button
+    class="notification-btn"
+    title="Notifications"
+    onclick="window.location.href='notifications.html'"
+>
+    ♧
+    <span class="notification-dot"></span>
+</button>
+
+        <div class="nav-divider"></div>
+
+       <div class="nav-user-wrapper">
+
+    <button class="nav-user" id="navUserButton">
+
+        <div class="avatar">
+            A
+        </div>
+
+        <div class="nav-user-info">
+            <strong>
+                Student
+            </strong>
+
+            <span>
+                CSE Student
+            </span>
+        </div>
+
+        <span class="nav-chevron">
+            ⌄
+        </span>
+
+    </button>
+
+
+    <div class="user-dropdown" id="userDropdown">
+
+        <a href="profile.html" class="user-dropdown-item">
+            <span>◎</span>
+            <div>
+                <strong>Profile</strong>
+                <small>View your profile</small>
+            </div>
+        </a>
+
+
+        <a href="settings.html" class="user-dropdown-item">
+            <span>⚙</span>
+            <div>
+                <strong>Settings</strong>
+                <small>Manage your account</small>
+            </div>
+        </a>
+
+
+        <div class="user-dropdown-divider"></div>
+
+
+        <button
+            class="user-dropdown-item logout-dropdown"
+            onclick="logoutUser()"
+        >
+            <span>↪</span>
+            <div>
+                <strong>Logout</strong>
+                <small>Sign out of skillswap</small>
+            </div>
+        </button>
+
+    </div>
+
+</div>
+
+    </div>
+
+</header>
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-container">
+
+        <!-- WELCOME SECTION -->
+        <section class="welcome-section">
+
+            <div>
+                <p class="welcome-small">WELCOME BACK 👋</p>
+
+                <h1>
+                    Learn. Share. <span>Connect.</span>
+                </h1>
+
+                <p class="welcome-text">
+                    Discover students, exchange knowledge,
+                    and build your skills together.
+                </p>
+
+                <div class="welcome-buttons">
+                    <button
+                        class="dashboard-primary-btn"
+                        onclick="location.href='discover.html'">
+                        🔍 Discover Skills
+                    </button>
+
+                    <button
+                        class="dashboard-secondary-btn"
+                        onclick="location.href='profile.html'">
+                        + Add Your Skills
+                    </button>
+                </div>
+            </div>
+
+            <div class="welcome-icon">
+                🚀
+            </div>
+
+        </section>
+
+
+        <!-- STATISTICS -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon blue">📚</div>
+
+                <div>
+                    <p>Skills I Offer</p>
+                    <h2>0</h2>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon purple">🎯</div>
+
+                <div>
+                    <p>Skills I Want</p>
+                    <h2>0</h2>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon orange">🤝</div>
+
+                <div>
+                    <p>Pending Requests</p>
+                    <h2>0</h2>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon green">💬</div>
+
+                <div>
+                    <p>Connections</p>
+                    <h2>0</h2>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>What do you want to do?</h2>
+                    <p>Start exploring skillswap</p>
+                </div>
+            </div>
+
+
+            <div class="action-grid">
+
+                <div class="action-card"
+                     onclick="location.href='discover.html'">
+
+                    <div class="action-icon discover-icon">
+                        🔎
+                    </div>
+
+                    <h3>Find Someone</h3>
+
+                    <p>
+                        Discover students who can teach
+                        the skills you want to learn.
+                    </p>
+
+                    <span class="card-link">
+                        Explore students →
+                    </span>
+
+                </div>
+
+
+                <div class="action-card"
+                     onclick="location.href='profile.html'">
+
+                    <div class="action-icon profile-icon">
+                        👤
+                    </div>
+
+                    <h3>Manage Skills</h3>
+
+                    <p>
+                        Add the skills you know and
+                        the skills you want to learn.
+                    </p>
+
+                    <span class="card-link">
+                        Update profile →
+                    </span>
+
+                </div>
+
+
+                <div class="action-card"
+                     onclick="location.href='requests.html'">
+
+                    <div class="action-icon request-icon">
+                        🤝
+                    </div>
+
+                    <h3>Skill Requests</h3>
+
+                    <p>
+                        Check incoming requests and
+                        connect with other students.
+                    </p>
+
+                    <span class="card-link">
+                        View requests →
+                    </span>
+
+                </div>
+
+
+                <div class="action-card"
+                     onclick="location.href='chat.html'">
+
+                    <div class="action-icon chat-icon">
+                        💬
+                    </div>
+
+                    <h3>Messages</h3>
+
+                    <p>
+                        Chat with your connections and
+                        start learning together.
+                    </p>
+
+                    <span class="card-link">
+                        Open chat →
+                    </span>
+
+                </div> 
+
+                <div class="action-card"
+     onclick="location.href='sessions.html'">
+
+    <div class="action-icon session-icon">
+        📅
+    </div>
+
+    <h3>My Sessions</h3>
+
+    <p>
+        View your upcoming, completed,
+        and cancelled skill-sharing sessions.
+    </p>
+
+    <span class="card-link">
+        View sessions →
+    </span>
+
+</div>
+
+            </div>
+
+        </section>
+
+
+        <!-- GETTING STARTED -->
+        <section class="getting-started">
+
+            <div class="getting-icon">
+                💡
+            </div>
+
+            <div>
+                <h2>Get started with skillswap</h2>
+
+                <p>
+                    Add your skills to your profile and
+                    start connecting with students today.
+                </p>
+            </div>
+
+            <button
+                class="dashboard-primary-btn"
+                onclick="location.href='profile.html'">
+                Complete Profile
+            </button>
+
+        </section>
+
+    </main> 
+
+    <script> 
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+
+const navUserButton =
+    document.getElementById("navUserButton");
+
+const userDropdown =
+    document.getElementById("userDropdown");
+
+
+navUserButton.addEventListener("click", function(event) {
+
+    event.stopPropagation();
+
+    userDropdown.classList.toggle("show");
+
+});
+
+
+document.addEventListener("click", function(event) {
+
+    if (
+        !navUserButton.contains(event.target) &&
+        !userDropdown.contains(event.target)
+    ) {
+
+        userDropdown.classList.remove("show");
+
+    }
+
+});
+
+
+function logoutUser() {
+    const confirmLogout =
+        confirm("Are you sure you want to log out?");
+
+    if (confirmLogout) {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");
+
+        window.location.href = "login.html";
+    }
+}
+
+</script>
+
+</body>
+</html>

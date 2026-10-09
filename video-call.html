@@ -1,0 +1,1092 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <title>SkillSwap - Video Call</title>
+    <link rel="stylesheet" href="frontend\css/style.css"> 
+    <script src="api.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+</head>
+
+<body class="video-call-body">
+
+    <!-- TOP BAR -->
+
+    <header class="video-call-header">
+
+       <div class="video-call-brand">
+    SkillSwap
+</div>
+
+        <div class="call-info">
+
+            <div class="call-status-dot"></div>
+
+            <div>
+                <strong id="participantName">
+    Connecting...
+</strong>
+
+                <span id="connectionStatus">
+                    Connected
+                </span>
+            </div>
+
+        </div>
+
+        <div class="call-header-actions">
+
+            <button
+                class="call-header-btn"
+                onclick="toggleChatPanel()"
+                title="Chat"
+            >
+                ◌
+            </button>
+
+            <button
+                class="call-header-btn"
+                onclick="toggleFullscreen()"
+                title="Fullscreen"
+            >
+                ⛶
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- VIDEO AREA -->
+
+    <main class="video-call-main">
+
+        <section class="video-stage">
+
+            <!-- REMOTE VIDEO -->
+
+            <div class="remote-video"> 
+                <video id="remoteVideo" autoplay playsinline></video>
+
+                <div class="remote-placeholder">
+
+                    <div class="remote-placeholder">
+
+    <div class="remote-avatar" id="remoteAvatar">
+        ?
+    </div>
+
+    <h2 id="remoteParticipantName">
+        Connecting...
+    </h2>
+
+    <p id="remoteParticipantSkill">
+        SkillSwap Participant
+    </p>
+
+    <span class="remote-connection">
+        ● Connected
+    </span>
+
+</div>
+
+<div class="remote-name">
+    Connecting...
+</div>
+
+            </div>
+
+
+            <!-- LOCAL VIDEO -->
+
+            <div class="local-video">
+
+    <video
+        id="localVideo"
+        autoplay
+        muted
+        playsinline>
+    </video>
+
+    <div class="local-name">
+        You
+    </div>
+
+</div>
+
+
+            <!-- CALL TIMER -->
+
+            <div class="call-timer">
+                <span class="timer-dot"></span>
+                <span id="callTimer">
+                    00:00
+                </span>
+            </div>
+
+
+            <!-- VIDEO STATUS -->
+
+            <div class="video-status">
+
+                <span class="status-indicator"></span>
+
+                HD quality
+
+            </div>
+
+        </section>
+
+
+        <!-- CALL CONTROLS -->
+
+        <section class="call-controls">
+
+            <button
+                class="call-control"
+                id="micButton"
+                onclick="toggleMicrophone()"
+                title="Mute microphone"
+            >
+
+                <span id="micIcon">
+                    🎙
+                </span>
+
+                <small>
+                    Mute
+                </small>
+
+            </button>
+
+
+            <button
+                class="call-control"
+                id="cameraButton"
+                onclick="toggleCamera()"
+                title="Turn camera off"
+            >
+
+                <span id="cameraIcon">
+                    📹
+                </span>
+
+                <small>
+                    Camera
+                </small>
+
+            </button>
+
+
+            <button
+                class="call-control"
+                onclick="showComingSoon('Screen sharing')"
+                title="Share screen"
+            >
+
+                <span>
+                    ▣
+                </span>
+
+                <small>
+                    Share
+                </small>
+
+            </button>
+
+
+            <button
+                class="call-control"
+                onclick="showComingSoon('Speaker settings')"
+                title="Speaker"
+            >
+
+                <span>
+                    🔊
+                </span>
+
+                <small>
+                    Speaker
+                </small>
+
+            </button>
+
+
+            <button
+                class="call-control"
+                onclick="toggleChatPanel()"
+                title="Chat"
+            >
+
+                <span>
+                    ◌
+                </span>
+
+                <small>
+                    Chat
+                </small>
+
+            </button>
+
+
+            <button
+                class="call-control end-call"
+                onclick="endCall()"
+                title="End call"
+            >
+
+                <span>
+                    ☎
+                </span>
+
+                <small>
+                    End
+                </small>
+
+            </button>
+
+        </section>
+
+
+        <!-- CALL FOOTER -->
+
+        <div class="video-call-footer">
+
+            <span>
+                🔒 End-to-end connection
+            </span>
+
+            <span>
+                SkillSwap Video Session
+            </span>
+
+        </div>
+
+    </main>
+
+
+    <!-- CHAT PANEL -->
+
+    <aside
+        class="video-chat-panel"
+        id="videoChatPanel"
+    >
+
+        <div class="video-chat-header">
+
+            <div>
+                <strong>
+                    Session Chat
+                </strong>
+
+               <span>
+    Connecting...
+</span>
+            </div>
+
+            <button onclick="toggleChatPanel()">
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            class="video-chat-messages"
+            id="videoChatMessages"
+        >
+
+            <div class="video-message received">
+
+                <span>
+                    Rahul
+                </span>
+
+                <p>
+                    Hey! Ready for the Java session?
+                </p>
+
+                <small>
+                    6:02 PM
+                </small>
+
+            </div>
+
+
+            <div class="video-message sent">
+
+                <p>
+                    Yes! Let's start.
+                </p>
+
+                <small>
+                    6:02 PM
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="video-chat-input">
+
+            <input
+                type="text"
+                id="videoMessageInput"
+                placeholder="Type a message..."
+            >
+
+            <button onclick="sendVideoMessage()">
+                ➤
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <script> 
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+     
+   /* =========================================================
+   ACTIVE SESSION
+   ========================================================= */
+
+const activeSessionId =
+    localStorage.getItem("activeSessionId");
+
+let currentSession = null;
+let remoteUserId = null;
+
+async function loadActiveSession() {
+
+    if (!activeSessionId) {
+
+        alert("No active session found.");
+
+        window.location.href =
+            "sessions.html";
+
+        return;
+    }
+
+    try {
+
+        const sessions =
+            await apiRequest("/sessions");
+
+        currentSession =
+            sessions.find(
+                session =>
+                    String(session.id) ===
+                    String(activeSessionId)
+            );
+
+        if (!currentSession) {
+
+            alert("Session could not be found.");
+
+            window.location.href =
+                "sessions.html";
+
+            return;
+        }
+
+        const currentUserId =
+            Number(
+                localStorage.getItem("userId")
+            );
+
+
+        /*
+         * Determine who the other participant is.
+         */
+
+        const hostId =
+            currentSession.hostUser?.id;
+
+        const guestId =
+            currentSession.guestUser?.id;
+
+
+        if (Number(hostId) === currentUserId) {
+
+            remoteUserId =
+                Number(guestId);
+
+        } else {
+
+            remoteUserId =
+                Number(hostId);
+        }
+
+
+        /*
+         * Update participant name
+         */
+
+        const participant =
+            Number(hostId) === currentUserId
+                ? currentSession.guestUser
+                : currentSession.hostUser;
+
+
+       if (participant?.name) {
+
+    // Top bar
+    document.getElementById("participantName").textContent =
+        participant.name;
+
+    // Large participant name
+    const remoteParticipantName =
+        document.getElementById("remoteParticipantName");
+
+    if (remoteParticipantName) {
+        remoteParticipantName.textContent =
+            participant.name;
+    }
+
+    // Small name label
+    const remoteName =
+        document.querySelector(".remote-name");
+
+    if (remoteName) {
+        remoteName.textContent =
+            participant.name;
+    }
+
+    // Chat header
+    const chatParticipant =
+        document.querySelector(".video-chat-header span");
+
+    if (chatParticipant) {
+        chatParticipant.textContent =
+            participant.name;
+    }
+
+    // Avatar initial
+    const remoteAvatar =
+        document.getElementById("remoteAvatar");
+
+    if (remoteAvatar) {
+        remoteAvatar.textContent =
+            participant.name.charAt(0).toUpperCase();
+    }
+}
+
+
+        console.log(
+            "Active session:",
+            currentSession
+        );
+
+        console.log(
+            "Current user ID:",
+            currentUserId
+        );
+
+        console.log(
+            "Remote user ID:",
+            remoteUserId
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Failed to load active session:",
+            error
+        );
+
+        alert(
+            "Could not load the session."
+        );
+    }
+}
+
+
+/* Load session information */
+
+loadActiveSession();
+        let seconds = 0;
+
+        let timerInterval =
+            setInterval(updateTimer, 1000);
+
+
+        function updateTimer() {
+
+            seconds++;
+
+            const minutes =
+                Math.floor(seconds / 60);
+
+            const remainingSeconds =
+                seconds % 60;
+
+            const formattedMinutes =
+                String(minutes).padStart(2, "0");
+
+            const formattedSeconds =
+                String(remainingSeconds).padStart(2, "0");
+
+            document.getElementById("callTimer")
+                .textContent =
+                formattedMinutes + ":" +
+                formattedSeconds;
+
+        }
+
+
+        function toggleMicrophone() {
+
+    const button =
+        document.getElementById("micButton");
+
+    const icon =
+        document.getElementById("micIcon");
+
+    if (!localStream) {
+        return;
+    }
+
+    const audioTrack =
+        localStream.getAudioTracks()[0];
+
+    if (!audioTrack) {
+        return;
+    }
+
+
+    if (audioTrack.enabled) {
+
+        // Mute microphone
+        audioTrack.enabled = false;
+
+        button.classList.add("disabled");
+
+        icon.textContent = "🔇";
+
+        button.querySelector("small")
+            .textContent = "Unmute";
+
+    } else {
+
+        // Unmute microphone
+        audioTrack.enabled = true;
+
+        button.classList.remove("disabled");
+
+        icon.textContent = "🎙";
+
+        button.querySelector("small")
+            .textContent = "Mute";
+    }
+}
+
+
+       function toggleCamera() {
+
+    const button =
+        document.getElementById("cameraButton");
+
+    const icon =
+        document.getElementById("cameraIcon");
+
+    const localVideo =
+        document.getElementById("localVideo");
+
+    if (!localStream) {
+        return;
+    }
+
+    const videoTrack =
+        localStream.getVideoTracks()[0];
+
+    if (!videoTrack) {
+        return;
+    }
+
+
+    if (videoTrack.enabled) {
+
+        // Turn camera OFF
+        videoTrack.enabled = false;
+
+        button.classList.add("disabled");
+
+        icon.textContent = "🚫";
+
+        button.querySelector("small")
+            .textContent = "Camera Off";
+
+    } else {
+
+        // Turn camera ON
+        videoTrack.enabled = true;
+
+        button.classList.remove("disabled");
+
+        icon.textContent = "📹";
+
+        button.querySelector("small")
+            .textContent = "Camera";
+
+    }
+}
+
+
+        function toggleChatPanel() {
+
+            const panel =
+                document.getElementById("videoChatPanel");
+
+            panel.classList.toggle("open");
+
+        }
+
+
+        function sendVideoMessage() {
+
+            const input =
+                document.getElementById("videoMessageInput");
+
+            const messages =
+                document.getElementById("videoChatMessages");
+
+            const text =
+                input.value.trim();
+
+            if (!text) {
+                return;
+            }
+
+            const message =
+                document.createElement("div");
+
+            message.className =
+                "video-message sent";
+
+            message.innerHTML = `
+                <p>${escapeHTML(text)}</p>
+                <small>Now</small>
+            `;
+
+            messages.appendChild(message);
+
+            input.value = "";
+
+            messages.scrollTop =
+                messages.scrollHeight;
+
+        }
+
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent = text;
+
+            return div.innerHTML;
+
+        }
+
+
+        document
+            .getElementById("videoMessageInput")
+            .addEventListener("keydown", function(event) {
+
+                if (event.key === "Enter") {
+
+                    sendVideoMessage();
+
+                }
+
+            });
+
+
+        function toggleFullscreen() {
+
+            if (!document.fullscreenElement) {
+
+                document.documentElement.requestFullscreen();
+
+            } else {
+
+                document.exitFullscreen();
+
+            }
+
+        }
+
+
+        function showComingSoon(feature) {
+
+            alert(
+                feature +
+                " will be connected when the video-call functionality is integrated."
+            );
+
+        }
+
+
+        function endCall() {
+
+            const confirmEnd =
+                confirm(
+                    "Are you sure you want to end this call?"
+                );
+
+            if (confirmEnd) {
+
+                clearInterval(timerInterval);
+
+                window.location.href =
+                    "chat.html";
+
+            }
+
+        }
+  
+        /* =========================================================
+   CAMERA + MICROPHONE
+   ========================================================= */
+
+let localStream = null; 
+
+let stompClient = null; 
+
+let peerConnection = null;
+let remoteStream = null;
+
+const iceServers = {
+    iceServers: [
+        {
+            urls: "stun:stun.l.google.com:19302"
+        }
+    ]
+}; 
+
+function createPeerConnection() {
+
+    peerConnection = new RTCPeerConnection(iceServers);
+
+    // Add local camera and microphone tracks
+    if (localStream) {
+        localStream.getTracks().forEach(track => {
+            peerConnection.addTrack(track, localStream);
+        });
+    }
+
+    // Create remote media stream
+    remoteStream = new MediaStream();
+
+    const remoteVideo = document.getElementById("remoteVideo");
+
+    if (remoteVideo) {
+        remoteVideo.srcObject = remoteStream;
+    }
+
+    // Receive remote camera/microphone
+    peerConnection.ontrack = function(event) {
+
+        console.log("Remote track received:", event.track.kind);
+
+        event.streams[0].getTracks().forEach(track => {
+            remoteStream.addTrack(track);
+        });
+
+        if (remoteVideo) {
+            remoteVideo.srcObject = remoteStream;
+        }
+    };
+
+    // ICE candidate generated by this browser
+    peerConnection.onicecandidate = function(event) {
+
+        if (event.candidate && remoteUserId) {
+
+            stompClient.publish({
+                destination: "/app/webrtc",
+                body: JSON.stringify({
+                    receiverId: remoteUserId,
+                    type: "ice-candidate",
+                    candidate: event.candidate.candidate,
+                    sdpMid: event.candidate.sdpMid,
+                    sdpMLineIndex: event.candidate.sdpMLineIndex
+                })
+            });
+
+            console.log("ICE candidate sent.");
+        }
+    };
+
+    // Connection state
+    peerConnection.onconnectionstatechange = function() {
+
+        console.log(
+            "WebRTC connection state:",
+            peerConnection.connectionState
+        );
+
+        const status =
+            document.getElementById("connectionStatus");
+
+        if (status) {
+
+            if (peerConnection.connectionState === "connected") {
+                status.textContent = "Connected";
+            }
+
+            if (peerConnection.connectionState === "connecting") {
+                status.textContent = "Connecting...";
+            }
+
+            if (
+                peerConnection.connectionState === "disconnected" ||
+                peerConnection.connectionState === "failed"
+            ) {
+                status.textContent = "Disconnected";
+            }
+        }
+    };
+
+    console.log("WebRTC peer connection created.");
+}
+
+
+
+
+
+function connectWebSocket() {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        console.error("JWT token not found.");
+        return;
+    }
+
+    stompClient = new StompJs.Client({
+
+        webSocketFactory: function () {
+            return new SockJS("http://localhost:8080/ws");
+        },
+
+        connectHeaders: {
+            Authorization: "Bearer " + token
+        },
+
+        reconnectDelay: 5000,
+
+        debug: function (str) {
+            console.log("[STOMP]", str);
+        },
+
+        onConnect: function (frame) {
+
+            console.log("WebSocket connected successfully.");
+            console.log("STOMP connection:", frame);
+
+            const currentUserId =
+                Number(localStorage.getItem("userId"));
+
+           stompClient.subscribe(
+    "/queue/webrtc/" + currentUserId,
+    async function (message) {
+
+        try {
+
+            const data = JSON.parse(message.body);
+
+            console.log("WebRTC signaling received:", data);
+
+            // Make sure peer connection exists
+           if (!localStream) {
+    console.log("Waiting for local camera/microphone...");
+    return;
+}
+
+if (!peerConnection) {
+    createPeerConnection();
+}
+
+            // ==============================
+            // RECEIVED OFFER
+            // ==============================
+
+            if (data.type === "offer") {
+
+                console.log("Offer received.");
+
+                await peerConnection.setRemoteDescription({
+                    type: "offer",
+                    sdp: data.sdp
+                });
+
+                const answer =
+                    await peerConnection.createAnswer();
+
+                await peerConnection.setLocalDescription(answer);
+
+                stompClient.publish({
+                    destination: "/app/webrtc",
+                    body: JSON.stringify({
+                        receiverId: data.senderId,
+                        type: "answer",
+                        sdp: answer.sdp
+                    })
+                });
+
+                console.log("Answer sent.");
+            }
+
+            // ==============================
+            // RECEIVED ANSWER
+            // ==============================
+
+            else if (data.type === "answer") {
+
+                console.log("Answer received.");
+
+                await peerConnection.setRemoteDescription({
+                    type: "answer",
+                    sdp: data.sdp
+                });
+
+                console.log("Remote answer applied.");
+            }
+
+            // ==============================
+            // RECEIVED ICE CANDIDATE
+            // ==============================
+
+            else if (data.type === "ice-candidate") {
+
+                console.log("ICE candidate received.");
+
+                if (data.candidate) {
+
+                    await peerConnection.addIceCandidate({
+                        candidate: data.candidate,
+                        sdpMid: data.sdpMid,
+                        sdpMLineIndex: data.sdpMLineIndex
+                    });
+
+                    console.log("ICE candidate added.");
+                }
+            }
+
+        } catch (error) {
+
+            console.error(
+                "WebRTC signaling error:",
+                error
+            );
+
+        }
+    }
+);
+
+            console.log(
+                "Subscribed to /queue/webrtc/" + currentUserId
+            );
+        },
+
+        onStompError: function (frame) {
+
+            console.error(
+                "WebSocket STOMP error:",
+                frame.headers["message"]
+            );
+
+            console.error(
+                "STOMP error details:",
+                frame.body
+            );
+        },
+
+        onWebSocketError: function (error) {
+
+            console.error(
+                "WebSocket error:",
+                error
+            );
+        }
+    });
+
+    stompClient.activate();
+}
+
+connectWebSocket();
+
+async function startLocalMedia() {
+
+    try {
+
+        localStream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: true
+        });
+
+        const localVideo =
+            document.getElementById("localVideo");
+
+        localVideo.srcObject = localStream;
+
+        console.log("Camera and microphone started."); 
+
+        // Start WebRTC call if this user is the host
+const currentUserId = Number(localStorage.getItem("userId"));
+const hostUserId = Number(currentSession?.hostUser?.id);
+
+if (currentUserId === hostUserId) {
+    console.log("This user is the host. Starting WebRTC offer...");
+
+    createPeerConnection();
+
+    const offer = await peerConnection.createOffer();
+
+    await peerConnection.setLocalDescription(offer);
+
+    stompClient.publish({
+        destination: "/app/webrtc",
+        body: JSON.stringify({
+            receiverId: remoteUserId,
+            type: "offer",
+            sdp: offer.sdp
+        })
+    });
+
+    console.log("WebRTC offer sent to user:", remoteUserId);
+}
+
+    } catch (error) {
+
+        console.error(
+            "Could not access camera/microphone:",
+            error
+        );
+
+        alert(
+            "Camera and microphone access is required for the video call."
+        );
+    }
+}
+
+
+/* Start camera when page loads */
+
+startLocalMedia();
+    </script>
+
+</body>
+</html>

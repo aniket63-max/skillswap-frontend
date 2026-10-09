@@ -1,0 +1,1533 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillSwap - Chat</title>
+
+    <link rel="stylesheet" href="frontend\css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="chat-body">
+
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="dashboard-navbar">
+
+       <div class="logo">
+   <img src="images/skillswap-logo.png" alt="SkillSwap">
+</div>
+
+        <nav class="dashboard-nav">
+
+            <a href="dashboard.html" class="nav-link">
+                <span class="nav-icon">⌂</span>
+                Home
+            </a>
+
+            <a href="profile.html" class="nav-link">
+                <span class="nav-icon">◎</span>
+                Profile
+            </a>
+
+            <a href="discover.html" class="nav-link">
+                <span class="nav-icon">⌕</span>
+                Discover
+            </a>
+
+            <a href="requests.html" class="nav-link">
+                <span class="nav-icon">♧</span>
+                Requests
+            </a>
+
+            <a href="chat.html" class="nav-link active">
+                <span class="nav-icon">◌</span>
+                Chat 
+
+                <a href="sessions.html" class="nav-link">
+    <span class="nav-icon">📅</span>
+    Sessions
+</a> 
+
+
+<a href="reviews.html" class="nav-link">
+    <span class="nav-icon">★</span>
+    Reviews
+</a>
+
+           
+
+        </nav>
+
+        <div class="nav-actions">
+
+           <button
+    class="notification-btn"
+    title="Notifications"
+    onclick="window.location.href='notifications.html'"
+>
+    ♧
+    <span class="notification-dot"></span>
+</button>
+            <div class="nav-divider"></div>
+
+           <div class="nav-user-wrapper">
+
+    <button class="nav-user" id="navUserButton">
+
+        <div class="avatar">
+            A
+        </div>
+
+        <div class="nav-user-info">
+            <strong>Student</strong>
+            <span>CSE Student</span>
+        </div>
+
+        <span class="nav-chevron">⌄</span>
+
+    </button>
+
+    <div class="user-dropdown" id="userDropdown">
+
+        <a href="profile.html" class="user-dropdown-item">
+            <span>◎</span>
+            <div>
+                <strong>Profile</strong>
+                <small>View your profile</small>
+            </div>
+        </a>
+
+        <a href="settings.html" class="user-dropdown-item">
+            <span>⚙</span>
+            <div>
+                <strong>Settings</strong>
+                <small>Manage your account</small>
+            </div>
+        </a>
+
+        <div class="user-dropdown-divider"></div>
+
+        <button
+            class="user-dropdown-item logout-dropdown"
+            onclick="logoutUser()"
+        >
+            <span>↪</span>
+            <div>
+                <strong>Logout</strong>
+                <small>Sign out of SkillSwap</small>
+            </div>
+        </button>
+
+    </div>
+
+</div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CHAT PAGE
+         ===================================================== -->
+
+    <main class="chat-page">
+
+
+        <!-- =================================================
+             CHAT HEADER
+             ================================================= -->
+
+        <div class="chat-page-heading">
+
+            <div>
+
+                <span class="chat-eyebrow">
+                    MESSAGES
+                </span>
+
+                <h1>
+                    Your conversations
+                </h1>
+
+                <p>
+                    Connect, learn and share knowledge with your
+                    SkillSwap community.
+                </p>
+
+            </div>
+
+            <div class="chat-heading-status">
+
+                <span class="status-pulse"></span>
+
+                <span>
+                    3 people online
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CHAT APPLICATION
+             ================================================= -->
+
+        <section class="chat-container">
+
+
+            <!-- =============================================
+                 CONVERSATION SIDEBAR
+                 ============================================= -->
+
+            <aside class="conversation-sidebar">
+
+
+                <div class="conversation-header">
+
+                    <div>
+
+                        <h2>
+                            Messages
+                        </h2>
+
+                        <span>
+                            5 conversations
+                        </span>
+
+                    </div>
+
+                  
+<button
+    class="new-chat-btn"
+    id="newChatBtn"
+    title="New conversation"
+    type="button"
+>
+    +
+</button>
+
+
+                </div>
+
+
+                <!-- Search -->
+
+                <div class="chat-search">
+
+                    <span>
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="conversationSearch"
+                        placeholder="Search conversations..."
+                    >
+
+                </div>
+
+
+                <!-- Conversation list -->
+
+                <div
+                    class="conversation-list"
+                    id="conversationList"
+                >
+
+
+                    <!-- CONVERSATION 1 -->
+
+                    <div
+                        class="conversation active"
+                        data-name="Rahul Sharma"
+                        onclick="openConversation(this, 'Rahul Sharma')"
+                    >
+
+                        <div class="conversation-avatar avatar-purple">
+                            RS
+
+                            <span class="online-indicator"></span>
+                        </div>
+
+
+                        <div class="conversation-info">
+
+                            <div class="conversation-top">
+
+                                <strong>
+                                    Rahul Sharma
+                                </strong>
+
+                                <time>
+                                    11:42 AM
+                                </time>
+
+                            </div>
+
+                            <div class="conversation-bottom">
+
+                                <span>
+                                    Hey, can you help me with Java?
+                                </span>
+
+                                <b>
+                                    2
+                                </b>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONVERSATION 2 -->
+
+                    <div
+                        class="conversation"
+                        data-name="Priya Patil"
+                        onclick="openConversation(this, 'Priya Patil')"
+                    >
+
+                        <div class="conversation-avatar avatar-pink">
+                            PP
+
+                            <span class="online-indicator"></span>
+                        </div>
+
+
+                        <div class="conversation-info">
+
+                            <div class="conversation-top">
+
+                                <strong>
+                                    Priya Patil
+                                </strong>
+
+                                <time>
+                                    10:18 AM
+                                </time>
+
+                            </div>
+
+                            <div class="conversation-bottom">
+
+                                <span>
+                                    I shared the design files.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONVERSATION 3 -->
+
+                    <div
+                        class="conversation"
+                        data-name="Aman Khan"
+                        onclick="openConversation(this, 'Aman Khan')"
+                    >
+
+                        <div class="conversation-avatar avatar-blue">
+                            AK
+                        </div>
+
+
+                        <div class="conversation-info">
+
+                            <div class="conversation-top">
+
+                                <strong>
+                                    Aman Khan
+                                </strong>
+
+                                <time>
+                                    Yesterday
+                                </time>
+
+                            </div>
+
+                            <div class="conversation-bottom">
+
+                                <span>
+                                    Let's practice DSA tomorrow.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONVERSATION 4 -->
+
+                    <div
+                        class="conversation"
+                        data-name="Sneha Joshi"
+                        onclick="openConversation(this, 'Sneha Joshi')"
+                    >
+
+                        <div class="conversation-avatar avatar-green">
+                            SJ
+                        </div>
+
+
+                        <div class="conversation-info">
+
+                            <div class="conversation-top">
+
+                                <strong>
+                                    Sneha Joshi
+                                </strong>
+
+                                <time>
+                                    Yesterday
+                                </time>
+
+                            </div>
+
+                            <div class="conversation-bottom">
+
+                                <span>
+                                    Thanks for explaining Python!
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONVERSATION 5 -->
+
+                    <div
+                        class="conversation"
+                        data-name="Neha Kulkarni"
+                        onclick="openConversation(this, 'Neha Kulkarni')"
+                    >
+
+                        <div class="conversation-avatar avatar-orange">
+                            NK
+                        </div>
+
+
+                        <div class="conversation-info">
+
+                            <div class="conversation-top">
+
+                                <strong>
+                                    Neha Kulkarni
+                                </strong>
+
+                                <time>
+                                    Monday
+                                </time>
+
+                            </div>
+
+                            <div class="conversation-bottom">
+
+                                <span>
+                                    See you in the session.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Empty conversation search -->
+
+                <div
+                    class="conversation-empty"
+                    id="conversationEmpty"
+                >
+
+                    <div>
+                        ⌕
+                    </div>
+
+                    <p>
+                        No conversations found.
+                    </p>
+
+                </div>
+
+            </aside>
+
+
+
+            <!-- =============================================
+                 ACTIVE CHAT
+                 ============================================= -->
+
+            <section class="active-chat">
+
+
+                <!-- Chat top -->
+
+                <header class="active-chat-header">
+
+                    <div class="active-person">
+
+                        <div class="active-avatar">
+                            RS
+
+                            <span></span>
+                        </div>
+
+                        <div>
+
+                            <h2 id="activeChatName">
+                                Rahul Sharma
+                            </h2>
+
+                            <p id="activeChatStatus">
+                                <span></span>
+                                Online
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="chat-actions">
+
+                        <button
+                            class="chat-action-btn"
+                            title="Voice call"
+                            onclick="showFeature('Voice call')"
+                        >
+                            ☎
+                        </button>
+
+                        <button
+                            class="chat-action-btn"
+                            title="Video call"
+                            onclick="startVideoCall()"
+                        >
+                            ▣
+                        </button>
+
+                        <button
+                            class="chat-action-btn"
+                            title="More options"
+                        >
+                            ⋯
+                        </button>
+
+                    </div>
+
+                </header>
+
+
+
+                <!-- =========================================
+                     MESSAGES
+                     ========================================= -->
+
+                <div
+                    class="messages-area"
+                    id="messagesArea"
+                >
+
+
+                    <!-- Date divider -->
+
+                    <div class="date-divider">
+                        <span>
+                            Today
+                        </span>
+                    </div>
+
+
+                    <!-- Received message -->
+
+                    <div class="message-row received">
+
+                        <div class="message-avatar">
+                            RS
+                        </div>
+
+                        <div class="message-content">
+
+                            <div class="message-bubble">
+                                Hey! Can you help me with Java
+                                OOP concepts?
+                            </div>
+
+                            <time>
+                                11:38 AM
+                            </time>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Sent message -->
+
+                    <div class="message-row sent">
+
+                        <div class="message-content">
+
+                            <div class="message-bubble">
+                                Sure! I can help you with that.
+                                Which topic are you struggling with?
+                            </div>
+
+                            <time>
+                                11:39 AM
+                                <span class="message-seen">
+                                    ✓✓
+                                </span>
+                            </time>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Received -->
+
+                    <div class="message-row received">
+
+                        <div class="message-avatar">
+                            RS
+                        </div>
+
+                        <div class="message-content">
+
+                            <div class="message-bubble">
+                                Mainly inheritance and polymorphism.
+                            </div>
+
+                            <time>
+                                11:40 AM
+                            </time>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Sent -->
+
+                    <div class="message-row sent">
+
+                        <div class="message-content">
+
+                            <div class="message-bubble">
+                                Perfect. We can go through both
+                                with some simple examples.
+                            </div>
+
+                            <time>
+                                11:41 AM
+                                <span class="message-seen">
+                                    ✓✓
+                                </span>
+                            </time>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Received -->
+
+                    <div class="message-row received">
+
+                        <div class="message-avatar">
+                            RS
+                        </div>
+
+                        <div class="message-content">
+
+                            <div class="message-bubble">
+                                That would be great! 😊
+                            </div>
+
+                            <time>
+                                11:42 AM
+                            </time>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =========================================
+                     TYPING INDICATOR
+                     ========================================= -->
+
+                <div
+    class="typing-indicator"
+    id="typingIndicator"
+    style="display: none;"
+>
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                   <small id="typingText">
+    is typing...
+</small>
+                </div>
+
+
+
+                <!-- =========================================
+                     MESSAGE INPUT
+                     ========================================= -->
+
+                <div class="message-composer">
+
+                    <button
+                        class="composer-btn"
+                        title="Emoji"
+                        onclick="showFeature('Emoji picker')"
+                    >
+                        ☺
+                    </button>
+
+
+                    <button
+                        class="composer-btn"
+                        title="Attach file"
+                        onclick="showFeature('File attachment')"
+                    >
+                        📎
+                    </button>
+
+
+                    <input
+                        type="text"
+                        id="messageInput"
+                        placeholder="Write a message..."
+                        autocomplete="off"
+                    >
+
+
+                  <button
+    type="button"
+    class="send-message-btn"
+    id="sendMessageBtn"
+    onclick="sendMessage()"
+>
+                        ➤
+                    </button>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =============================================
+                 CHAT EMPTY STATE
+                 ============================================= -->
+
+            <section
+                class="chat-no-selection"
+                id="chatNoSelection"
+            >
+
+                <div class="no-selection-icon">
+                    ◌
+                </div>
+
+                <h2>
+                    Your conversations
+                </h2>
+
+                <p>
+                    Select a conversation to start chatting.
+                </p>
+
+            </section>
+
+
+        </section>
+
+
+    </main>
+
+<script src="api.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script>  
+
+    // ==========================================
+// Real Chat Backend Integration
+// ==========================================
+
+let currentChatId = null; 
+
+// ==========================================
+// Real-time Chat - WebSocket
+// ==========================================
+
+let stompClient = null;
+
+function connectWebSocket() {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        console.error("JWT token not found.");
+        return;
+    }
+
+    stompClient = new StompJs.Client({
+
+        webSocketFactory: function () {
+            return new SockJS("http://localhost:8080/ws");
+        },
+
+        connectHeaders: {
+            Authorization: `Bearer ${token}`
+        },
+
+        reconnectDelay: 5000,
+
+        onConnect: function () {
+
+            console.log("WebSocket connected successfully.");
+
+            if (currentChatId) {
+                subscribeToChat(currentChatId);
+            }
+        },
+
+        onStompError: function (frame) {
+
+            console.error(
+                "WebSocket STOMP error:",
+                frame.headers["message"]
+            );
+        },
+
+        onWebSocketError: function (error) {
+
+            console.error(
+                "WebSocket error:",
+                error
+            );
+        }
+    });
+
+    stompClient.activate();
+} 
+
+function subscribeToChat(chatId) {
+
+    if (!stompClient || !stompClient.connected) {
+        console.log("WebSocket is not connected yet.");
+        return;
+    }
+
+    stompClient.subscribe(
+        `/topic/chat/${chatId}`,
+        function (message) {
+
+            const receivedMessage =
+                JSON.parse(message.body);
+
+            console.log(
+                "Real-time message received:",
+                receivedMessage
+            );
+
+            displayRealtimeMessage(receivedMessage);
+        }
+    );
+
+    console.log(
+        "Subscribed to chat:",
+        chatId
+    );
+} 
+
+function displayRealtimeMessage(message) {
+
+    const currentUserId =
+        Number(localStorage.getItem("userId"));
+
+    const senderId =
+        Number(message.senderId);
+
+    // Don't display our own message twice.
+    // sendMessage() already displays it.
+    if (senderId === currentUserId) {
+        return;
+    }
+
+    const messageRow =
+        document.createElement("div");
+
+    messageRow.className =
+        "message-row received";
+
+    const senderName =
+        message.senderName || "Student";
+
+    const initials =
+        senderName
+            .split(" ")
+            .map(word => word.charAt(0))
+            .join("")
+            .substring(0, 2)
+            .toUpperCase();
+
+    messageRow.innerHTML = `
+
+        <div class="message-avatar">
+            ${escapeHTML(initials)}
+        </div>
+
+        <div class="message-content">
+
+            <div class="message-bubble">
+                ${escapeHTML(message.content || "")}
+            </div>
+
+            <time>
+                ${formatMessageTime(message.sentAt)}
+            </time>
+
+        </div>
+    `;
+
+    messagesArea.appendChild(messageRow);
+
+    messagesArea.scrollTop =
+        messagesArea.scrollHeight;
+}
+
+async function loadRealChats() {
+    try {
+        const chats = await getChats();
+
+        console.log("Chats loaded from backend:", chats);
+
+        // Remove dummy conversations
+        const conversationList =
+            document.getElementById("conversationList");
+
+        conversationList.innerHTML = "";
+
+        if (!chats || chats.length === 0) {
+            conversationEmpty.style.display = "flex";
+            return;
+        }
+
+        conversationEmpty.style.display = "none";
+
+        const currentUserId =
+            Number(localStorage.getItem("userId"));
+
+        chats.forEach(function(chat, index) {
+
+            const otherUser =
+                Number(chat.user1?.id) === currentUserId
+                    ? chat.user2
+                    : chat.user1;
+
+            if (!otherUser) return;
+
+            const name = otherUser.name || "Student";
+
+            const initials = name
+                .split(" ")
+                .map(word => word.charAt(0))
+                .join("")
+                .substring(0, 2)
+                .toUpperCase();
+
+            const conversation =
+                document.createElement("div");
+
+            conversation.className =
+                "conversation" +
+                (index === 0 ? " active" : "");
+
+            conversation.dataset.name = name; 
+
+            conversation.dataset.chatId = chat.id;
+           conversation.onclick = function() {
+    openConversation(conversation, name);
+};
+
+            conversation.innerHTML = `
+                <div class="conversation-avatar avatar-purple">
+                    ${escapeHTML(initials)}
+                    <span class="online-indicator"></span>
+                </div>
+
+                <div class="conversation-info">
+
+                    <div class="conversation-top">
+                        <strong>
+                            ${escapeHTML(name)}
+                        </strong>
+
+                        <time>—</time>
+                    </div>
+
+                    <div class="conversation-bottom">
+                        <span>
+                            Start a conversation
+                        </span>
+                    </div>
+
+                </div>
+            `;
+
+            conversationList.appendChild(conversation);
+        });
+ 
+  const firstConversation =
+    conversationList.querySelector(".conversation");
+
+if (firstConversation) {
+    firstConversation.click();
+}
+
+      console.log(
+    "Real conversations displayed successfully."
+);
+
+    } catch (error) {
+
+        console.error(
+            "Failed to load chats:",
+            error
+        );
+
+        conversationList.innerHTML = "";
+
+        conversationEmpty.style.display = "flex";
+    }
+}
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+
+        const conversationSearch =
+            document.getElementById(
+                "conversationSearch"
+            );
+
+        const conversations =
+            document.querySelectorAll(
+                ".conversation"
+            );
+
+        const conversationEmpty =
+            document.getElementById(
+                "conversationEmpty"
+            );
+
+        const messageInput =
+            document.getElementById(
+                "messageInput"
+            );
+
+        const messagesArea =
+            document.getElementById(
+                "messagesArea"
+            );
+
+
+        /* =================================================
+           SEARCH CONVERSATIONS
+           ================================================= */
+
+        conversationSearch.addEventListener(
+            "input",
+            function () {
+
+                const search =
+                    this.value
+                        .toLowerCase()
+                        .trim();
+
+                let visibleCount = 0;
+
+
+                conversations.forEach(
+                    conversation => {
+
+                        const name =
+                            conversation
+                                .dataset
+                                .name
+                                .toLowerCase();
+
+
+                        if (
+                            name.includes(search)
+                        ) {
+
+                            conversation.style.display =
+                                "flex";
+
+                            visibleCount++;
+
+                        } else {
+
+                            conversation.style.display =
+                                "none";
+
+                        }
+
+                    }
+                );
+
+
+                if (visibleCount === 0) {
+
+                    conversationEmpty.style.display =
+                        "flex";
+
+                } else {
+
+                    conversationEmpty.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           OPEN CONVERSATION
+           ================================================= */
+
+      
+async function openConversation(element, name) {
+    document.querySelectorAll(".conversation").forEach(item => {
+        item.classList.remove("active");
+    });
+
+    element.classList.add("active");
+
+    document.getElementById("activeChatName").textContent = name;
+
+    const chatId = element.dataset.chatId;
+
+    if (!chatId) {
+        console.error("Chat ID not found.");
+        return;
+    }
+
+    // Show the selected chat and hide the empty state
+    document.querySelector(".active-chat").style.display = "flex";
+    document.getElementById("chatNoSelection").style.display = "none";
+
+    currentChatId = chatId;
+
+    await loadMessages(chatId);
+
+    if (stompClient && stompClient.connected) {
+        subscribeToChat(chatId);
+    }
+
+    messageInput.focus();
+}
+
+async function loadMessages(chatId) {
+
+    try {
+
+        const messages = await getChatMessages(chatId);
+
+        console.log("Messages loaded:", messages);
+
+        messagesArea.innerHTML = "";
+
+        if (!messages || messages.length === 0) {
+
+            messagesArea.innerHTML = `
+                <div class="date-divider">
+                    <span>No messages yet</span>
+                </div>
+            `;
+
+            return;
+        }
+
+        messages.forEach(function(message) {
+
+            const currentUserId =
+                Number(localStorage.getItem("userId"));
+
+            const isSent =
+                Number(message.sender?.id) === currentUserId;
+
+            const senderName =
+                message.sender?.name || "Student";
+
+            const initials = senderName
+                .split(" ")
+                .map(word => word.charAt(0))
+                .join("")
+                .substring(0, 2)
+                .toUpperCase();
+
+            const row = document.createElement("div");
+
+            row.className =
+                `message-row ${isSent ? "sent" : "received"}`;
+
+            row.innerHTML = `
+
+                ${
+                    !isSent
+                    ? `
+                        <div class="message-avatar">
+                            ${escapeHTML(initials)}
+                        </div>
+                      `
+                    : ""
+                }
+
+                <div class="message-content">
+
+                    <div class="message-bubble">
+                        ${escapeHTML(message.content || "")}
+                    </div>
+
+                    <time>
+                        ${formatMessageTime(message.sentAt)}
+                    </time>
+
+                </div>
+            `;
+
+            messagesArea.appendChild(row);
+        });
+
+        messagesArea.scrollTop =
+            messagesArea.scrollHeight;
+
+    } catch (error) {
+
+        console.error(
+            "Failed to load messages:",
+            error
+        );
+
+        messagesArea.innerHTML = `
+            <div class="date-divider">
+                <span>Could not load messages</span>
+            </div>
+        `;
+    }
+} 
+
+function formatMessageTime(dateString) {
+
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+
+    return date.toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit"
+    });
+}
+
+        /* =================================================
+           SEND MESSAGE
+           ================================================= */
+
+       async function sendMessage() {
+
+    const text = messageInput.value.trim();
+
+    if (!text) {
+        return;
+    }
+
+    if (!currentChatId) {
+        alert("Please select a conversation first.");
+        return;
+    }
+
+    try {
+
+        const savedMessage =
+            await sendChatMessage(currentChatId, text);
+
+        console.log("Message saved:", savedMessage);
+
+        const messageRow =
+            document.createElement("div");
+
+        messageRow.className =
+            "message-row sent";
+
+        messageRow.innerHTML = `
+
+            <div class="message-content">
+
+                <div class="message-bubble">
+                    ${escapeHTML(savedMessage.content || text)}
+                </div>
+
+                <time>
+                    ${formatMessageTime(savedMessage.sentAt)}
+                    <span class="message-seen">
+                        ✓
+                    </span>
+                </time>
+
+            </div>
+
+        `;
+
+        messagesArea.appendChild(messageRow);
+
+        messageInput.value = "";
+
+        messagesArea.scrollTop =
+            messagesArea.scrollHeight;
+
+    } catch (error) {
+
+        console.error(
+            "Failed to send message:",
+            error
+        );
+
+        alert(
+            "Could not send message: " +
+            error.message
+        );
+    }
+}
+
+
+        /* =================================================
+           ENTER TO SEND
+           ================================================= */
+
+        messageInput.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Enter" &&
+                    !event.shiftKey
+                ) {
+
+                    event.preventDefault();
+
+                    sendMessage();
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           ESCAPE HTML
+           ================================================= */
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.textContent = text;
+
+            return div.innerHTML;
+
+        }
+
+
+        /* =================================================
+           VIDEO CALL
+           ================================================= */
+
+        function startVideoCall() {
+
+            alert(
+                "Video call will be connected through WebRTC."
+            );
+
+        }
+
+
+        /* =================================================
+           FUTURE FEATURES
+           ================================================= */
+
+        function showFeature(feature) {
+
+            alert(
+                feature +
+                " will be connected in the next stage."
+            );
+
+        }
+
+
+        /* =================================================
+           DEMO TYPING INDICATOR
+           ================================================= */
+
+       
+
+
+        /* =================================================
+           INITIAL SCROLL
+           ================================================= */
+
+        messagesArea.scrollTop =
+            messagesArea.scrollHeight;
+
+            const navUserButton = document.getElementById("navUserButton");
+const userDropdown = document.getElementById("userDropdown");
+
+navUserButton.addEventListener("click", function(event) {
+    event.stopPropagation();
+    userDropdown.classList.toggle("show");
+});
+
+document.addEventListener("click", function(event) {
+    if (
+        !navUserButton.contains(event.target) &&
+        !userDropdown.contains(event.target)
+    ) {
+        userDropdown.classList.remove("show");
+    }
+});
+
+function logoutUser() {
+
+    const confirmLogout =
+        confirm("Are you sure you want to log out?");
+
+    if (confirmLogout) {
+
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+
+        window.location.href = "login.html";
+    }
+
+} 
+loadRealChats();
+connectWebSocket(); 
+
+
+
+document.getElementById("newChatBtn").addEventListener("click", async () => {
+    try {
+        const users = await apiRequest("/users");
+
+        const currentUserId = Number(localStorage.getItem("userId"));
+
+        const otherUsers = users.filter(
+            user => Number(user.id) !== currentUserId
+        );
+
+        if (otherUsers.length === 0) {
+            alert("No other users found.");
+            return;
+        }
+
+        const userList = otherUsers
+            .map(user => `${user.id}: ${user.name} (${user.email})`)
+            .join("\n");
+
+        const selectedId = prompt(
+            "Enter the ID of the person you want to chat with:\n\n" + userList
+        );
+
+        if (!selectedId) return;
+
+        const selectedUser = otherUsers.find(
+            user => String(user.id) === selectedId.trim()
+        );
+
+        if (!selectedUser) {
+            alert("Invalid user ID. Please try again.");
+            return;
+        }
+
+        await apiRequest(`/chats?user2Id=${selectedUser.id}`, {
+            method: "POST"
+        });
+
+        await loadRealChats();
+
+        alert(`Chat with ${selectedUser.name} is ready!`);
+
+    } catch (error) {
+        console.error("Could not start chat:", error);
+        alert("Could not start a chat. Check the backend and try again.");
+    }
+});
+
+
+    </script>
+
+</body>
+
+</html>

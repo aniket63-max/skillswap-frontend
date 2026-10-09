@@ -1,0 +1,1516 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <title>Skillswap - Requests</title>
+
+    <link rel="stylesheet" href="frontend\css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="requests-body">
+
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="dashboard-navbar">
+
+       <div class="logo">
+    <img src="images/Skillswap-logo.png" alt="Skillswap">
+</div>
+
+        <nav class="dashboard-nav">
+
+            <a href="dashboard.html" class="nav-link">
+                <span class="nav-icon">⌂</span>
+                Home
+            </a>
+
+            <a href="profile.html" class="nav-link">
+                <span class="nav-icon">◎</span>
+                Profile
+            </a>
+
+            <a href="discover.html" class="nav-link">
+                <span class="nav-icon">⌕</span>
+                Discover
+            </a>
+
+            <a href="requests.html" class="nav-link active">
+                <span class="nav-icon">♧</span>
+                Requests
+            </a>
+
+            <a href="chat.html" class="nav-link">
+                <span class="nav-icon">◌</span>
+                Chat
+            </a> 
+            <a href="sessions.html" class="nav-link">
+    <span class="nav-icon">📅</span>
+    Sessions
+</a> 
+
+
+<a href="reviews.html" class="nav-link">
+    <span class="nav-icon">★</span>
+    Reviews
+</a>
+
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <button
+    class="notification-btn"
+    title="Notifications"
+    onclick="window.location.href='notifications.html'"
+>
+    ♧
+    <span class="notification-dot"></span>
+</button>
+
+            <div class="nav-divider"></div>
+
+            <div class="nav-user-wrapper">
+
+    <button class="nav-user" id="navUserButton">
+
+        <div class="avatar">
+            A
+        </div>
+
+        <div class="nav-user-info">
+            <strong>Student</strong>
+            <span>CSE Student</span>
+        </div>
+
+        <span class="nav-chevron">⌄</span>
+
+    </button>
+
+    <div class="user-dropdown" id="userDropdown">
+
+        <a href="profile.html" class="user-dropdown-item">
+            <span>◎</span>
+            <div>
+                <strong>Profile</strong>
+                <small>View your profile</small>
+            </div>
+        </a>
+
+        <a href="settings.html" class="user-dropdown-item">
+            <span>⚙</span>
+            <div>
+                <strong>Settings</strong>
+                <small>Manage your account</small>
+            </div>
+        </a>
+
+        <div class="user-dropdown-divider"></div>
+
+        <button
+            class="user-dropdown-item logout-dropdown"
+            onclick="logoutUser()"
+        >
+            <span>↪</span>
+            <div>
+                <strong>Logout</strong>
+                <small>Sign out of Skillswap</small>
+            </div>
+        </button>
+
+    </div>
+
+</div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN REQUESTS PAGE
+         ===================================================== -->
+
+    <main class="requests-page">
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="requests-hero">
+
+            <div class="requests-hero-text">
+
+                <div class="requests-badge">
+                    <span></span>
+                    CONNECTION CENTER
+                </div>
+
+                <h1>
+                    Build meaningful
+                    <br>
+                    <span>learning connections.</span>
+                </h1>
+
+                <p>
+                    Manage your skill-sharing requests and
+                    connect with students who share your interests.
+                </p>
+
+            </div>
+
+
+            <div class="requests-summary">
+
+                <div class="summary-icon">
+                    ♧
+                </div>
+
+                <div>
+
+                    <strong id="heroPendingCount">
+                        3
+                    </strong>
+
+                    <span>
+                        Pending requests
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             STAT CARDS
+             ================================================= -->
+
+        <section class="request-stats">
+
+            <div class="request-stat-card">
+
+                <div class="request-stat-icon incoming-icon">
+                    ↓
+                </div>
+
+                <div>
+                    <span>Incoming</span>
+                    <strong id="incomingCount">3</strong>
+                </div>
+
+            </div>
+
+
+            <div class="request-stat-card">
+
+                <div class="request-stat-icon sent-icon">
+                    ↑
+                </div>
+
+                <div>
+                    <span>Sent</span>
+                    <strong id="sentCount">2</strong>
+                </div>
+
+            </div>
+
+
+            <div class="request-stat-card">
+
+                <div class="request-stat-icon connection-icon">
+                    ✦
+                </div>
+
+                <div>
+                    <span>Connections</span>
+                    <strong>8</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             REQUEST TOOLBAR
+             ================================================= -->
+
+        <section class="requests-toolbar">
+
+            <div class="request-tabs">
+
+                <button
+                    class="request-tab active"
+                    data-tab="incoming"
+                >
+                    Incoming
+                    <span class="tab-count">3</span>
+                </button>
+
+                <button
+                    class="request-tab"
+                    data-tab="sent"
+                >
+                    Sent
+                    <span class="tab-count">2</span>
+                </button>
+
+            </div>
+
+
+            <div class="request-search">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    id="requestSearch"
+                    placeholder="Search requests..."
+                >
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             INCOMING REQUESTS
+             ================================================= -->
+
+        <section
+            class="request-section"
+            id="incomingSection"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        WAITING FOR YOU
+                    </span>
+
+                    <h2>
+                        Incoming requests
+                    </h2>
+
+                    <p>
+                        Students who want to connect with you.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="request-list"
+                id="incomingList"
+            >
+
+
+                <!-- REQUEST 1 -->
+
+                <article
+                    class="request-card"
+                    data-name="Rohan Deshmukh"
+                >
+
+                    <div class="request-avatar avatar-blue">
+                        RD
+                    </div>
+
+
+                    <div class="request-person">
+
+                        <div class="person-name-row">
+
+                            <h3>
+                                Rohan Deshmukh
+                            </h3>
+
+                            <span class="request-online">
+                                ●
+                            </span>
+
+                        </div>
+
+                        <p>
+                            CSE • 2nd Year
+                        </p>
+
+                        <div class="request-skill-line">
+
+                            <span>Wants to learn</span>
+
+                            <strong>
+                                Java
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="request-message">
+
+                        <span>
+                            Message
+                        </span>
+
+                        <p>
+                            "I'd like to learn Java
+                            fundamentals from you."
+                        </p>
+
+                    </div>
+
+
+                    <div class="request-actions">
+
+                        <button
+                            class="decline-btn"
+                            onclick="declineRequest(this)"
+                        >
+                            Decline
+                        </button>
+
+                        <button
+                            class="accept-btn"
+                            onclick="acceptRequest(this)"
+                        >
+                            Accept
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- REQUEST 2 -->
+
+                <article
+                    class="request-card"
+                    data-name="Karan Shah"
+                >
+
+                    <div class="request-avatar avatar-purple">
+                        KS
+                    </div>
+
+
+                    <div class="request-person">
+
+                        <div class="person-name-row">
+
+                            <h3>
+                                Karan Shah
+                            </h3>
+
+                            <span class="request-online">
+                                ●
+                            </span>
+
+                        </div>
+
+                        <p>
+                            IT • 2nd Year
+                        </p>
+
+                        <div class="request-skill-line">
+
+                            <span>Wants to learn</span>
+
+                            <strong>
+                                Web Development
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="request-message">
+
+                        <span>
+                            Message
+                        </span>
+
+                        <p>
+                            "Can we learn frontend
+                            development together?"
+                        </p>
+
+                    </div>
+
+
+                    <div class="request-actions">
+
+                        <button
+                            class="decline-btn"
+                            onclick="declineRequest(this)"
+                        >
+                            Decline
+                        </button>
+
+                        <button
+                            class="accept-btn"
+                            onclick="acceptRequest(this)"
+                        >
+                            Accept
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- REQUEST 3 -->
+
+                <article
+                    class="request-card"
+                    data-name="Meera Kulkarni"
+                >
+
+                    <div class="request-avatar avatar-pink">
+                        MK
+                    </div>
+
+
+                    <div class="request-person">
+
+                        <div class="person-name-row">
+
+                            <h3>
+                                Meera Kulkarni
+                            </h3>
+
+                            <span class="request-online offline">
+                                ●
+                            </span>
+
+                        </div>
+
+                        <p>
+                            AI & DS • 2nd Year
+                        </p>
+
+                        <div class="request-skill-line">
+
+                            <span>Wants to learn</span>
+
+                            <strong>
+                                Python
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="request-message">
+
+                        <span>
+                            Message
+                        </span>
+
+                        <p>
+                            "I'd love to learn Python
+                            for my upcoming project."
+                        </p>
+
+                    </div>
+
+
+                    <div class="request-actions">
+
+                        <button
+                            class="decline-btn"
+                            onclick="declineRequest(this)"
+                        >
+                            Decline
+                        </button>
+
+                        <button
+                            class="accept-btn"
+                            onclick="acceptRequest(this)"
+                        >
+                            Accept
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SENT REQUESTS
+             ================================================= -->
+
+        <section
+            class="request-section sent-section"
+            id="sentSection"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        YOUR REQUESTS
+                    </span>
+
+                    <h2>
+                        Sent requests
+                    </h2>
+
+                    <p>
+                        Requests you've sent to other students.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="request-list"
+                id="sentList"
+            >
+
+
+                <!-- SENT 1 -->
+
+                <article
+                    class="request-card sent-card"
+                    data-name="Priya Patil"
+                >
+
+                    <div class="request-avatar avatar-pink">
+                        PP
+                    </div>
+
+
+                    <div class="request-person">
+
+                        <div class="person-name-row">
+
+                            <h3>
+                                Priya Patil
+                            </h3>
+
+                        </div>
+
+                        <p>
+                            IT • 2nd Year
+                        </p>
+
+                        <div class="request-skill-line">
+
+                            <span>You want to learn</span>
+
+                            <strong>
+                                UI/UX Design
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="sent-status pending">
+                        <span></span>
+                        Pending
+                    </div>
+
+
+                    <div class="request-actions">
+
+                        <button
+                            class="cancel-btn"
+                            onclick="cancelRequest(this)"
+                        >
+                            Cancel Request
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- SENT 2 -->
+
+                <article
+                    class="request-card sent-card"
+                    data-name="Aman Khan"
+                >
+
+                    <div class="request-avatar avatar-green">
+                        AK
+                    </div>
+
+
+                    <div class="request-person">
+
+                        <div class="person-name-row">
+
+                            <h3>
+                                Aman Khan
+                            </h3>
+
+                        </div>
+
+                        <p>
+                            CSE • 3rd Year
+                        </p>
+
+                        <div class="request-skill-line">
+
+                            <span>You want to learn</span>
+
+                            <strong>
+                                DSA
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="sent-status pending">
+                        <span></span>
+                        Pending
+                    </div>
+
+
+                    <div class="request-actions">
+
+                        <button
+                            class="cancel-btn"
+                            onclick="cancelRequest(this)"
+                        >
+                            Cancel Request
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             EMPTY STATE
+             ================================================= -->
+
+        <section
+            class="requests-empty"
+            id="requestsEmpty"
+        >
+
+            <div class="empty-request-icon">
+                ♧
+            </div>
+
+            <h3>
+                No requests found
+            </h3>
+
+            <p>
+                There are no requests matching your search.
+            </p>
+
+            <button onclick="clearRequestSearch()">
+                Clear Search
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LOADING STATE
+             ================================================= -->
+
+        <section
+            class="requests-loading"
+            id="requestsLoading"
+        >
+
+            <div class="request-spinner"></div>
+
+            <p>
+                Loading requests...
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+<script src="api.js"></script>
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script> 
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+
+        const tabs =
+            document.querySelectorAll(".request-tab");
+
+        const incomingSection =
+            document.getElementById("incomingSection");
+
+        const sentSection =
+            document.getElementById("sentSection");
+
+        const requestSearch =
+            document.getElementById("requestSearch");
+
+        const incomingList =
+            document.getElementById("incomingList");
+
+        const sentList =
+            document.getElementById("sentList");
+
+        const requestsEmpty =
+            document.getElementById("requestsEmpty");
+
+
+        /* =================================================
+           TABS
+           ================================================= */
+
+        tabs.forEach(tab => {
+
+            tab.addEventListener("click", function () {
+
+                tabs.forEach(item => {
+                    item.classList.remove("active");
+                });
+
+                this.classList.add("active");
+
+
+                const selectedTab =
+                    this.dataset.tab;
+
+
+                if (selectedTab === "incoming") {
+
+                    incomingSection.style.display = "block";
+
+                    sentSection.style.display = "none";
+
+                } else {
+
+                    incomingSection.style.display = "none";
+
+                    sentSection.style.display = "block";
+
+                }
+
+
+                requestSearch.value = "";
+
+                filterRequests();
+
+            });
+
+        });
+
+
+        /* =================================================
+           SEARCH
+           ================================================= */
+
+        function filterRequests() {
+
+            const search =
+                requestSearch.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const activeTab =
+                document.querySelector(
+                    ".request-tab.active"
+                ).dataset.tab;
+
+
+            const list =
+                activeTab === "incoming"
+                    ? incomingList
+                    : sentList;
+
+
+            const cards =
+                list.querySelectorAll(".request-card");
+
+
+            let visibleCount = 0;
+
+
+            cards.forEach(card => {
+
+                const name =
+                    card.dataset.name.toLowerCase();
+
+
+                if (name.includes(search)) {
+
+                    card.style.display = "grid";
+
+                    visibleCount++;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+
+            if (visibleCount === 0) {
+
+                requestsEmpty.style.display = "flex";
+
+            } else {
+
+                requestsEmpty.style.display = "none";
+
+            }
+
+        }
+
+
+        requestSearch.addEventListener(
+            "input",
+            filterRequests
+        ); 
+
+        // ==========================================
+// LOAD REAL INCOMING REQUESTS
+// ==========================================
+
+async function loadIncomingRequests() {
+
+    try {
+
+        const requests = await getReceivedRequests();
+
+        console.log("Real incoming requests:", requests);
+
+        // Remove dummy requests
+        incomingList.innerHTML = "";
+
+        const pendingRequests = (requests || [])
+    .filter(request => request.status === "PENDING");
+
+if (pendingRequests.length === 0) {
+
+            requestsEmpty.style.display = "flex";
+
+            updateCounts();
+
+            return;
+        }
+
+       pendingRequests.forEach(function(request) {
+
+            const sender = request.sender || {};
+            const skill = request.skill || {};
+
+            const senderName = sender.name || "Student";
+            const skillName = skill.name || "Skill";
+
+            const initials = senderName
+                .split(" ")
+                .map(word => word.charAt(0))
+                .join("")
+                .substring(0, 2)
+                .toUpperCase();
+
+            const card = document.createElement("article");
+
+            card.className = "request-card";
+
+            card.dataset.name = senderName;
+
+            card.dataset.requestId = request.id;
+
+            card.innerHTML = `
+                <div class="request-avatar avatar-purple">
+                    ${initials}
+                </div>
+
+                <div class="request-person">
+
+                    <div class="person-name-row">
+
+                        <h3>
+                            ${escapeHTML(senderName)}
+                        </h3>
+
+                        <span class="request-online">
+                            ●
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Skillswap Member
+                    </p>
+
+                    <div class="request-skill-line">
+
+                        <span>Wants to learn</span>
+
+                        <strong>
+                            ${escapeHTML(skillName)}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div class="request-message">
+
+                    <span>
+                        Skill Request
+                    </span>
+
+                    <p>
+                        ${escapeHTML(senderName)}
+                        wants to learn
+                        ${escapeHTML(skillName)}.
+                    </p>
+
+                </div>
+
+                <div class="request-actions">
+
+                    <button
+                        class="decline-btn"
+                        onclick="declineRequest(this)"
+                    >
+                        Decline
+                    </button>
+
+                    <button
+                        class="accept-btn"
+                        onclick="acceptRequest(this)"
+                    >
+                        Accept
+                    </button>
+
+                </div>
+            `;
+
+            incomingList.appendChild(card);
+
+        });
+
+        requestsEmpty.style.display = "none";
+
+        updateCounts();
+
+        console.log(
+            "Real incoming requests loaded successfully."
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Failed to load incoming requests:",
+            error
+        );
+
+        incomingList.innerHTML = "";
+
+        requestsEmpty.style.display = "flex";
+
+    }
+} 
+
+function escapeHTML(value) {
+
+    const div = document.createElement("div");
+
+    div.textContent = value;
+
+    return div.innerHTML;
+}
+
+
+        /* =================================================
+           ACCEPT REQUEST
+           ================================================= */
+
+       async function acceptRequest(button) {
+
+    const card =
+        button.closest(".request-card");
+
+    if (!card) return;
+
+    const requestId =
+        card.dataset.requestId;
+
+    const name =
+        card.dataset.name;
+
+    if (!requestId) {
+
+        alert("Request ID not found.");
+
+        return;
+    }
+
+    button.disabled = true;
+
+    button.textContent = "Accepting...";
+
+    try {
+
+        await acceptSkillRequest(requestId);
+
+        card.classList.add("request-accepted");
+
+        setTimeout(() => {
+
+            card.remove();
+
+            updateCounts();
+
+        }, 450);
+
+        alert(
+            "You are now connected with " +
+            name +
+            "!"
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Failed to accept request:",
+            error
+        );
+
+        alert(
+            "Could not accept request: " +
+            error.message
+        );
+
+        button.disabled = false;
+
+        button.textContent = "Accept";
+    }
+}
+
+
+        /* =================================================
+           DECLINE REQUEST
+           ================================================= */
+
+       async function declineRequest(button) {
+
+    const card =
+        button.closest(".request-card");
+
+    if (!card) return;
+
+    const requestId =
+        card.dataset.requestId;
+
+    if (!requestId) {
+
+        alert("Request ID not found.");
+
+        return;
+    }
+
+    button.disabled = true;
+
+    button.textContent = "Declining...";
+
+    try {
+
+        await rejectSkillRequest(requestId);
+
+        card.classList.add("request-declined");
+
+        setTimeout(() => {
+
+            card.remove();
+
+            updateCounts();
+
+        }, 350);
+
+    } catch (error) {
+
+        console.error(
+            "Failed to decline request:",
+            error
+        );
+
+        alert(
+            "Could not decline request: " +
+            error.message
+        );
+
+        button.disabled = false;
+
+        button.textContent = "Decline";
+    }
+}
+        /* =================================================
+           CANCEL SENT REQUEST
+           ================================================= */
+
+        function cancelRequest(button) {
+
+            const card =
+                button.closest(".request-card"); 
+
+                const name = card.dataset.name;
+
+let sentRequests =
+    JSON.parse(localStorage.getItem("sentRequests")) || [];
+
+sentRequests = sentRequests.filter(function(item) {
+    return item !== name;
+});
+
+localStorage.setItem(
+    "sentRequests",
+    JSON.stringify(sentRequests)
+);
+
+
+            card.classList.add("request-declined");
+
+
+            setTimeout(() => {
+
+                card.remove();
+
+                updateCounts();
+
+            }, 350);
+
+        }  
+
+         // ==========================================
+// LOAD SENT REQUESTS FROM DISCOVER
+// ==========================================
+
+const sentRequestDetails = {
+    "Rahul Sharma": {
+        initials: "RS",
+        avatar: "avatar-purple",
+        course: "CSE • 2nd Year",
+        skill: "Java"
+    },
+
+    "Priya Patil": {
+        initials: "PP",
+        avatar: "avatar-pink",
+        course: "IT • 2nd Year",
+        skill: "UI/UX Design"
+    },
+
+    "Aman Khan": {
+        initials: "AK",
+        avatar: "avatar-green",
+        course: "CSE • 3rd Year",
+        skill: "DSA"
+    },
+
+    "Sneha Joshi": {
+        initials: "SJ",
+        avatar: "avatar-green",
+        course: "CSE • 3rd Year",
+        skill: "Python"
+    },
+
+    "Aditya Mehta": {
+        initials: "AM",
+        avatar: "avatar-orange",
+        course: "CSE • 2nd Year",
+        skill: "Java"
+    },
+
+    "Neha Kulkarni": {
+        initials: "NK",
+        avatar: "avatar-indigo",
+        course: "AI & DS • 2nd Year",
+        skill: "UI/UX Design"
+    }
+};
+
+
+async function loadSentRequests() {
+    try {
+        const requests = await getSentRequests();
+
+        console.log("Real sent requests:", requests);
+
+        // Always remove dummy cards
+        sentList.innerHTML = "";
+
+        if (!requests || requests.length === 0) {
+            updateCounts();
+            return;
+        }
+
+        requests.forEach(function(request) {
+
+            const receiver = request.receiver || {};
+            const skill = request.skill || {};
+
+            const receiverName = receiver.name || "Student";
+            const skillName = skill.name || "Skill";
+
+            const initials = receiverName
+                .split(" ")
+                .map(word => word.charAt(0))
+                .join("")
+                .substring(0, 2)
+                .toUpperCase();
+
+            const card = document.createElement("article");
+
+            card.className = "request-card sent-card";
+
+            card.dataset.name = receiverName;
+            card.dataset.requestId = request.id;
+
+            let statusClass = "pending";
+            let statusText = "Pending";
+
+            if (request.status === "ACCEPTED") {
+                statusClass = "accepted";
+                statusText = "Accepted";
+            }
+
+            if (request.status === "REJECTED") {
+                statusClass = "rejected";
+                statusText = "Rejected";
+            }
+
+            card.innerHTML = `
+                <div class="request-avatar avatar-purple">
+                    ${initials}
+                </div>
+
+                <div class="request-person">
+
+                    <div class="person-name-row">
+                        <h3>${escapeHTML(receiverName)}</h3>
+                    </div>
+
+                    <p>Skillswap Member</p>
+
+                    <div class="request-skill-line">
+                        <span>You want to learn</span>
+                        <strong>${escapeHTML(skillName)}</strong>
+                    </div>
+
+                </div>
+
+                <div class="sent-status ${statusClass}">
+                    <span></span>
+                    ${statusText}
+                </div>
+
+                <div class="request-actions">
+                    ${
+                        request.status === "PENDING"
+                        ? `
+                            <button
+                                class="cancel-btn"
+                                onclick="cancelRequest(this)">
+                                Cancel Request
+                            </button>
+                          `
+                        : ""
+                    }
+                </div>
+            `;
+
+            sentList.appendChild(card);
+        });
+
+        updateCounts();
+
+        console.log("Real sent requests loaded successfully.");
+
+    } catch (error) {
+
+        console.error(
+            "Failed to load sent requests:",
+            error
+        );
+
+        sentList.innerHTML = "";
+        updateCounts();
+    }
+}
+
+
+        /* =================================================
+           UPDATE COUNTS
+           ================================================= */
+
+        function updateCounts() {
+
+            const incoming =
+                incomingList.querySelectorAll(
+                    ".request-card"
+                ).length;
+
+
+            const sent =
+                sentList.querySelectorAll(
+                    ".request-card"
+                ).length;
+
+
+            document.getElementById(
+                "incomingCount"
+            ).textContent = incoming;
+
+
+            document.getElementById(
+                "sentCount"
+            ).textContent = sent;
+
+
+            document.getElementById(
+                "heroPendingCount"
+            ).textContent = incoming;
+
+
+            tabs[0].querySelector(
+                ".tab-count"
+            ).textContent = incoming;
+
+
+            tabs[1].querySelector(
+                ".tab-count"
+            ).textContent = sent;
+
+
+            filterRequests();
+
+        }
+
+
+        /* =================================================
+           CLEAR SEARCH
+           ================================================= */
+
+        function clearRequestSearch() {
+
+            requestSearch.value = "";
+
+            filterRequests();
+
+        }
+
+
+        /* =================================================
+           INITIAL STATE
+           ================================================= */
+
+        sentSection.style.display = "none";
+
+        requestsEmpty.style.display = "none";
+
+        // ================================
+// USER DROPDOWN NAVIGATION
+// ================================
+
+const navUserButton = document.getElementById("navUserButton");
+const userDropdown = document.getElementById("userDropdown");
+
+if (navUserButton && userDropdown) {
+
+    navUserButton.addEventListener("click", function(event) {
+        event.stopPropagation();
+        userDropdown.classList.toggle("show");
+    });
+
+    document.addEventListener("click", function(event) {
+        if (
+            !navUserButton.contains(event.target) &&
+            !userDropdown.contains(event.target)
+        ) {
+            userDropdown.classList.remove("show");
+        }
+    });
+
+}
+function logoutUser() {
+
+    const confirmLogout =
+        confirm("Are you sure you want to log out?");
+
+    if (confirmLogout) {
+
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+
+        window.location.href = "login.html";
+    }
+
+}  
+loadIncomingRequests();
+loadSentRequests();
+    </script>
+
+</body>
+
+</html>

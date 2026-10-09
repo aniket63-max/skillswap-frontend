@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews | SkillSwap</title>
+   
+<link rel="stylesheet" href="frontend\css/style.css">
+
+<!-- Premium font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .reviews-page {
+            max-width: 1000px;
+            margin: 35px auto;
+            padding: 24px;
+        }
+
+        .reviews-heading {
+            margin-bottom: 24px;
+        }
+
+        .review-card {
+            background: var(--card-bg, #fff);
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: 14px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+
+        .review-stars {
+            color: #f59e0b;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+
+        .review-meta {
+            color: var(--text-secondary, #6b7280);
+            font-size: 14px;
+        }
+
+        .review-message {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .review-status {
+            margin: 16px 0;
+        }
+
+        .review-empty {
+            padding: 24px;
+            text-align: center;
+            border: 1px dashed #9ca3af;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body> 
+
+    
+<header class="dashboard-navbar">
+    <div class="logo">
+        <a href="dashboard.html">
+            <img src="images/skillswap-logo.png" alt="SkillSwap">
+        </a>
+    </div>
+
+    <nav class="dashboard-nav">
+        <a href="dashboard.html" class="nav-link">
+            <span class="nav-icon">⌂</span>
+            Home
+        </a>
+
+        <a href="profile.html" class="nav-link">
+            <span class="nav-icon">◎</span>
+            Profile
+        </a>
+
+        <a href="discover.html" class="nav-link">
+            <span class="nav-icon">⌕</span>
+            Discover
+        </a>
+
+        <a href="requests.html" class="nav-link">
+            <span class="nav-icon">♧</span>
+            Requests
+        </a>
+
+        <a href="chat.html" class="nav-link">
+            <span class="nav-icon">◌</span>
+            Chat
+        </a>
+
+        <a href="sessions.html" class="nav-link">
+            <span class="nav-icon">📅</span>
+            Sessions
+        </a>
+
+        <a href="notifications.html" class="nav-link">
+            <span class="nav-icon">♧</span>
+            Notifications
+        </a>
+
+        <a href="reviews.html" class="nav-link active">
+            <span class="nav-icon">★</span>
+            Reviews
+        </a>
+    </nav>
+</header>
+
+    <main class="reviews-page">
+        <div class="reviews-heading">
+            <h1>Reviews & Ratings</h1>
+            <p>See feedback from your SkillSwap learning sessions.</p>
+        </div>
+
+        <section class="review-card">
+            <h2>Write a Review</h2>
+            <p class="review-meta">
+                Submit feedback for someone after completing a session.
+            </p>
+
+            <form id="reviewForm">
+                <label for="sessionId">Completed Session ID</label>
+                <input
+                    id="sessionId"
+                    type="number"
+                    min="1"
+                    required
+                    placeholder="Enter your completed session ID"
+                >
+
+                <br><br>
+
+                <label for="reviewedUserId">User ID of the person reviewed</label>
+                <input
+                    id="reviewedUserId"
+                    type="number"
+                    min="1"
+                    required
+                    placeholder="Enter their user ID"
+                >
+
+                <br><br>
+
+                <label for="rating">Your Rating</label>
+                <select id="rating" required>
+                    <option value="">Select a rating</option>
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Very good</option>
+                    <option value="3">3 - Good</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="1">1 - Poor</option>
+                </select>
+
+                <br><br>
+
+                <label for="comment">Your Feedback</label>
+                <textarea
+                    id="comment"
+                    rows="4"
+                    maxlength="1000"
+                    required
+                    placeholder="How was your learning experience?"
+                ></textarea>
+
+                <br><br>
+
+                <button type="submit">Submit Review</button>
+            </form>
+
+            <p id="formStatus" class="review-status" role="status"></p>
+        </section>
+
+        <section>
+            <h2>Reviews You've Received</h2>
+            <p id="reviewsStatus" class="review-status" role="status">
+                Loading reviews...
+            </p>
+            <div id="reviewsList"></div>
+        </section>
+    </main>
+
+    <script src="api.js"></script>
+    <script>
+        const reviewsList = document.getElementById("reviewsList");
+        const reviewsStatus = document.getElementById("reviewsStatus");
+        const formStatus = document.getElementById("formStatus");
+
+        function getCurrentUserId() {
+            return localStorage.getItem("userId");
+        }
+
+        function getToken() {
+            return localStorage.getItem("token") ||
+                   localStorage.getItem("jwtToken");
+        }
+
+        function escapeHTML(value) {
+            return String(value ?? "").replace(/[&<>"']/g, char => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            })[char]);
+        }
+
+        function formatDate(value) {
+            if (!value) return "Date unavailable";
+
+            const date = new Date(value);
+            return Number.isNaN(date.getTime())
+                ? "Date unavailable"
+                : date.toLocaleDateString();
+        }
+
+        async function loadReviews() {
+            const userId = getCurrentUserId();
+
+            if (!userId || !getToken()) {
+                reviewsStatus.textContent =
+                    "Please log in to view your reviews.";
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    `http://localhost:8080/api/reviews/user/${encodeURIComponent(userId)}`,
+                    {
+                        headers: {
+                            "Authorization": `Bearer ${getToken()}`
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(
+                        response.status === 401 || response.status === 403
+                            ? "Your login may have expired. Please log in again."
+                            : `Could not load reviews (HTTP ${response.status}).`
+                    );
+                }
+
+                const data = await response.json();
+                const reviews = Array.isArray(data) ? data : [];
+
+                reviewsList.replaceChildren();
+
+                if (reviews.length === 0) {
+                    reviewsStatus.textContent = "";
+                    reviewsList.innerHTML =
+                        '<div class="review-empty">No reviews received yet.</div>';
+                    return;
+                }
+
+                reviewsStatus.textContent =
+                    `${reviews.length} review(s) received.`;
+
+                reviews.forEach(review => {
+                    const card = document.createElement("article");
+                    card.className = "review-card";
+
+                    const rating = Math.min(
+                        5,
+                        Math.max(0, Number(review.rating) || 0)
+                    );
+
+                    const reviewerName =
+                        review.reviewer?.name ||
+                        `User ${review.reviewer?.id ?? "unknown"}`;
+
+                    card.innerHTML = `
+                        <h3>${escapeHTML(reviewerName)}</h3>
+                        <div class="review-stars" aria-label="${rating} out of 5 stars">
+                            ${"★".repeat(rating)}${"☆".repeat(5 - rating)}
+                        </div>
+                        <p class="review-message">${escapeHTML(review.comment || "No written comment.")}</p>
+                        <p class="review-meta">
+                            ${escapeHTML(formatDate(review.createdAt))}
+                        </p>
+                    `;
+
+                    reviewsList.appendChild(card);
+                });
+            } catch (error) {
+                reviewsStatus.textContent = error.message ||
+                    "Unable to load reviews. Check that the backend is running.";
+            }
+        }
+
+        document.getElementById("reviewForm").addEventListener(
+            "submit",
+            async event => {
+                event.preventDefault();
+                formStatus.textContent = "";
+
+                const sessionId =
+                    document.getElementById("sessionId").value;
+                const reviewedUserId =
+                    document.getElementById("reviewedUserId").value;
+                const rating = document.getElementById("rating").value;
+                const comment =
+                    document.getElementById("comment").value.trim();
+
+                if (!getToken() || !getCurrentUserId()) {
+                    formStatus.textContent =
+                        "Please log in before submitting a review.";
+                    return;
+                }
+
+                if (reviewedUserId === getCurrentUserId()) {
+                    formStatus.textContent =
+                        "You cannot review yourself.";
+                    return;
+                }
+
+                if (!comment) {
+                    formStatus.textContent =
+                        "Please enter your feedback.";
+                    return;
+                }
+
+                const params = new URLSearchParams({
+                    sessionId,
+                    reviewedUserId,
+                    rating,
+                    comment
+                });
+
+                try {
+                    const response = await fetch(
+                        `http://localhost:8080/api/reviews?${params}`,
+                        {
+                            method: "POST",
+                            headers: {
+                                "Authorization": `Bearer ${getToken()}`
+                            }
+                        }
+                    );
+
+                    if (!response.ok) {
+                        const message = await response.text();
+                        throw new Error(
+                            message || `Review submission failed (HTTP ${response.status}).`
+                        );
+                    }
+
+                    formStatus.textContent = "Review submitted successfully!";
+                    document.getElementById("reviewForm").reset();
+                    await loadReviews();
+                } catch (error) {
+                    formStatus.textContent = error.message ||
+                        "Could not submit review. Please try again.";
+                }
+            }
+        );
+ 
+
+const savedSessionId = localStorage.getItem("reviewSessionId");
+const savedReviewedUserId = localStorage.getItem("reviewedUserId");
+
+if (savedSessionId) {
+    document.getElementById("sessionId").value = savedSessionId;
+}
+
+if (savedReviewedUserId) {
+    document.getElementById("reviewedUserId").value = savedReviewedUserId;
+}
+
+
+        loadReviews();
+    </script>
+</body>
+</html>

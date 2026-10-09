@@ -1,0 +1,829 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillSwap - Profile</title>
+
+    <link rel="stylesheet" href="frontend\css/style.css">
+</head>
+
+<body class="profile-body">
+
+    <!-- NAVBAR -->
+
+   <header class="dashboard-navbar">
+
+   <div class="logo">
+    <img src="images/skillswap-logo.png" alt="SkillSwap">
+</div> 
+
+    <nav class="dashboard-nav">
+
+        <a href="dashboard.html" class="nav-link">
+            <span class="nav-icon">⌂</span>
+            Home
+        </a>
+
+        <a href="profile.html" class="nav-link">
+            <span class="nav-icon">◎</span>
+            Profile
+        </a>
+
+        <a href="discover.html" class="nav-link">
+            <span class="nav-icon">⌕</span>
+            Discover
+        </a>
+
+        <a href="requests.html" class="nav-link">
+            <span class="nav-icon">♧</span>
+            Requests
+        </a>
+
+        <a href="chat.html" class="nav-link">
+            <span class="nav-icon">◌</span>
+            Chat 
+
+            <a href="sessions.html" class="nav-link">
+    <span class="nav-icon">📅</span>
+    Sessions
+</a> 
+
+
+<a href="reviews.html" class="nav-link">
+    <span class="nav-icon">★</span>
+    Reviews
+</a>
+
+        
+
+    </nav>
+
+    <div class="nav-actions">
+
+       <button
+    class="notification-btn"
+    title="Notifications"
+    onclick="window.location.href='notifications.html'"
+>
+    ♧
+    <span class="notification-dot"></span>
+</button>
+
+        <div class="nav-divider"></div>
+
+       <div class="nav-user-wrapper">
+
+    <button class="nav-user" id="navUserButton">
+
+        <div class="avatar">
+            A
+        </div>
+
+        <div class="nav-user-info">
+
+            <strong>
+                Student
+            </strong>
+
+            <span>
+                CSE Student
+            </span>
+
+        </div>
+
+        <span class="nav-chevron">
+            ⌄
+        </span>
+
+    </button>
+
+
+    <div class="user-dropdown" id="userDropdown">
+
+        <a href="profile.html" class="user-dropdown-item">
+
+            <span>◎</span>
+
+            <div>
+                <strong>Profile</strong>
+                <small>View your profile</small>
+            </div>
+
+        </a>
+
+
+        <a href="settings.html" class="user-dropdown-item">
+
+            <span>⚙</span>
+
+            <div>
+                <strong>Settings</strong>
+                <small>Manage your account</small>
+            </div>
+
+        </a>
+
+
+        <div class="user-dropdown-divider"></div>
+
+
+        <button
+            class="user-dropdown-item logout-dropdown"
+            onclick="logoutUser()"
+        >
+
+            <span>↪</span>
+
+            <div>
+                <strong>Logout</strong>
+              <small>Sign out of SkillSwap</small>
+            </div>
+
+        </button>
+
+    </div>
+
+</div>
+    </div>
+
+</header>
+
+    <!-- MAIN PROFILE -->
+
+    <main class="profile-container">
+
+        <!-- PROFILE HEADER -->
+
+        <section class="profile-header-card">
+
+            <div class="profile-avatar">
+                A
+            </div>
+
+            <div class="profile-main-info">
+
+                <p class="profile-label">
+                    MY PROFILE
+                </p>
+
+                <h1>
+                    Aniket Atkari
+                </h1>
+
+                <p class="profile-role">
+                    CSE Student • Mumbai
+                </p>
+
+                <p class="profile-about">
+                    Passionate about technology, programming and
+                    learning new skills. Looking forward to connecting
+                    with other students and sharing knowledge.
+                </p>
+
+            </div>
+
+            <button
+                class="profile-edit-btn"
+                onclick="editProfile()">
+
+                ✏️ Edit Profile
+
+            </button>
+
+        </section>
+
+
+        <!-- PROFILE GRID -->
+
+        <section class="profile-grid">
+
+
+            <!-- ABOUT -->
+
+            <div class="profile-card">
+
+                <div class="profile-card-title">
+
+                    <div class="profile-card-icon">
+                        👤
+                    </div>
+
+                    <div>
+                        <h2>
+                            About Me
+                        </h2>
+
+                        <p>
+                            A little about yourself
+                        </p>
+                    </div>
+
+                </div>
+
+                <p class="profile-description">
+
+                    I'm a Computer Science student interested in
+                    software development and technology. I enjoy
+                    learning programming and working on projects
+                    with other students.
+
+                </p>
+
+            </div>
+
+
+            <!-- EDUCATION -->
+
+            <div class="profile-card">
+
+                <div class="profile-card-title">
+
+                    <div class="profile-card-icon">
+                        🎓
+                    </div>
+
+                    <div>
+                        <h2>
+                            Education
+                        </h2>
+
+                        <p>
+                            Academic information
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="education-item">
+
+                    <h3>
+                        Computer Science & Engineering
+                    </h3>
+
+                    <p>
+                        Bachelor's Degree
+                    </p>
+
+                    <span>
+                        2025 - Present
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- SKILLS SECTION -->
+
+        <section class="skills-section">
+
+
+            <!-- SKILLS I OFFER -->
+
+            <div class="profile-card skills-card">
+
+                <div class="skills-heading">
+
+                    <div>
+
+                        <h2>
+                            💡 Skills I Can Teach
+                        </h2>
+
+                        <p>
+                            Skills you can share with others
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="add-skill-btn"
+                        onclick="addSkill()">
+
+                        + Add Skill
+
+                    </button>
+
+                </div>
+
+
+               <div class="skill-tags" id="teachSkills">
+    <span class="skill-tag blue">Loading...</span>
+</div>
+
+            </div>
+
+
+            <!-- SKILLS I WANT -->
+
+            <div class="profile-card skills-card">
+
+                <div class="skills-heading">
+
+                    <div>
+
+                        <h2>
+                            🎯 Skills I Want To Learn
+                        </h2>
+
+                        <p>
+                            Skills you want to learn from others
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="add-skill-btn"
+                        onclick="addSkill()">
+
+                        + Add Skill
+
+                    </button>
+
+                </div>
+
+
+                <div class="skill-tags" id="learnSkills">
+    <span class="skill-tag blue">Loading...</span>
+</div>
+            </div>
+
+
+        </section>
+
+
+        <!-- PROFILE STATS -->
+
+        <section class="profile-stats">
+
+            <div class="profile-stat">
+
+                <span>
+                    📚
+                </span>
+
+                <div>
+
+                    <strong>
+                        4
+                    </strong>
+
+                    <p>
+                        Skills Offered
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-stat">
+
+                <span>
+                    🎯
+                </span>
+
+                <div>
+
+                    <strong>
+                        4
+                    </strong>
+
+                    <p>
+                        Skills Wanted
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-stat">
+
+                <span>
+                    🤝
+                </span>
+
+                <div>
+
+                    <strong>
+                        0
+                    </strong>
+
+                    <p>
+                        Connections
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-stat">
+
+                <span>
+                    ⭐
+                </span>
+
+                <div>
+
+                    <strong>
+                        New
+                    </strong>
+
+                    <p>
+                        Rating
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+<script src="api.js"></script>
+    <script> 
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+
+        async function loadProfile() {
+
+    try {
+
+        const user = await getCurrentUser();
+
+        console.log("Current user:", user);
+
+        // Profile name
+        const profileName = document.querySelector(".profile-main-info h1");
+
+        if (profileName) {
+            profileName.textContent = user.name || "Student";
+        }
+
+        // Navbar name
+        const navName = document.querySelector(".nav-user-info strong");
+
+        if (navName) {
+            navName.textContent = user.name || "Student";
+        }
+
+        // Navbar avatar
+        const navAvatar = document.querySelector(".nav-user .avatar");
+
+        if (navAvatar) {
+            navAvatar.textContent =
+                (user.name || "S").charAt(0).toUpperCase();
+        }
+
+        // Main profile avatar
+        const profileAvatar = document.querySelector(".profile-avatar");
+
+        if (profileAvatar) {
+            profileAvatar.textContent =
+                (user.name || "S").charAt(0).toUpperCase();
+        }
+
+    } catch (error) {
+
+        console.error("Profile loading failed:", error);
+
+    }
+} 
+ 
+
+async function loadUserSkills() {
+
+    try {
+
+        const userId = localStorage.getItem("userId");
+
+        if (!userId) {
+            throw new Error("User ID not found.");
+        }
+
+        const userSkills = await getUserSkills(userId);
+
+        console.log("User skills:", userSkills);
+
+        const teachContainer =
+            document.getElementById("teachSkills");
+
+        const learnContainer =
+            document.getElementById("learnSkills");
+
+        teachContainer.innerHTML = "";
+        learnContainer.innerHTML = "";
+
+        let teachCount = 0;
+        let learnCount = 0;
+
+        userSkills.forEach(userSkill => {
+
+            const skillName =
+                userSkill.skill?.name || "Unknown Skill";
+
+            const skillType =
+                userSkill.skillType;
+
+            const tag = document.createElement("span");
+
+            tag.className = "skill-tag blue";
+            tag.textContent = skillName;
+
+            if (skillType === "TEACH") {
+
+                teachContainer.appendChild(tag);
+                teachCount++;
+
+            } else if (skillType === "LEARN") {
+
+                learnContainer.appendChild(tag);
+                learnCount++;
+
+            }
+
+        });
+
+        if (teachCount === 0) {
+
+            teachContainer.innerHTML =
+                '<span class="skill-tag blue">No skills added yet</span>';
+
+        }
+
+        if (learnCount === 0) {
+
+            learnContainer.innerHTML =
+                '<span class="skill-tag blue">No skills added yet</span>';
+
+        }
+
+    } catch (error) {
+
+        console.error("Failed to load user skills:", error);
+
+    }
+
+}
+
+
+function editProfile() {
+
+    alert("Profile editing will be connected to the backend later.");
+
+}
+
+
+async function addSkill() {
+
+    // Create popup background
+    const overlay = document.createElement("div");
+
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.background = "rgba(0, 0, 0, 0.55)";
+    overlay.style.display = "flex";
+    overlay.style.alignItems = "center";
+    overlay.style.justifyContent = "center";
+    overlay.style.zIndex = "9999";
+
+    // Create popup
+    const modal = document.createElement("div");
+
+    modal.style.width = "420px";
+    modal.style.maxWidth = "90%";
+    modal.style.background = "#ffffff";
+    modal.style.borderRadius = "18px";
+    modal.style.padding = "30px";
+    modal.style.boxShadow = "0 25px 70px rgba(0,0,0,0.25)";
+
+    modal.innerHTML = `
+        <h2 style="margin:0 0 8px;">Add a Skill</h2>
+
+        <p style="margin:0 0 22px; color:#777;">
+            Choose a skill and tell us how you want to use it.
+        </p>
+
+        <label style="display:block; margin-bottom:8px; font-weight:600;">
+            Select Skill
+        </label>
+
+        <select id="skillSelect"
+            style="width:100%; padding:12px; border:1px solid #ddd;
+                   border-radius:10px; margin-bottom:20px;">
+
+            <option value="">Loading skills...</option>
+
+        </select>
+
+        <label style="display:block; margin-bottom:8px; font-weight:600;">
+            Skill Type
+        </label>
+
+        <select id="skillTypeSelect"
+            style="width:100%; padding:12px; border:1px solid #ddd;
+                   border-radius:10px; margin-bottom:24px;">
+
+            <option value="TEACH">I can teach this</option>
+            <option value="LEARN">I want to learn this</option>
+
+        </select>
+
+        <div style="display:flex; gap:10px; justify-content:flex-end;">
+
+            <button id="cancelSkillBtn"
+                style="padding:11px 18px; border:1px solid #ddd;
+                       background:#fff; border-radius:10px;
+                       cursor:pointer;">
+                Cancel
+            </button>
+
+            <button id="saveSkillBtn"
+                style="padding:11px 20px; border:none;
+                       background:#111827; color:white;
+                       border-radius:10px; cursor:pointer;">
+                Add Skill
+            </button>
+
+        </div>
+    `;
+
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+
+
+    // Load skills from backend
+    try {
+
+        const skills = await getSkills(); 
+        console.log("Skills received from backend:", skills);
+
+        const skillSelect =
+            document.getElementById("skillSelect");
+
+        skillSelect.innerHTML =
+            `<option value="">Choose a skill</option>`;
+
+        skills.forEach(skill => {
+
+            const option = document.createElement("option");
+
+            option.value = skill.id;
+            option.textContent = skill.name;
+
+            skillSelect.appendChild(option);
+
+        });
+
+    } catch (error) {
+
+        console.error("Failed to load skills:", error);
+
+        alert("Unable to load skills from the server.");
+
+        overlay.remove();
+
+        return;
+    }
+
+
+    // Cancel button
+    document.getElementById("cancelSkillBtn")
+        .addEventListener("click", function () {
+
+            overlay.remove();
+
+        });
+
+
+    // Save skill
+    document.getElementById("saveSkillBtn")
+        .addEventListener("click", async function () {
+
+            const skillId =
+                document.getElementById("skillSelect").value;
+
+            const skillType =
+                document.getElementById("skillTypeSelect").value;
+
+            if (!skillId) {
+
+                alert("Please select a skill.");
+
+                return;
+            }
+
+            const saveButton =
+                document.getElementById("saveSkillBtn");
+
+            saveButton.disabled = true;
+            saveButton.textContent = "Adding...";
+
+
+            try {
+
+                await addUserSkill(skillId, skillType);
+
+                alert("Skill added successfully!");
+
+                overlay.remove();
+
+                // Reload skills from backend
+                await loadUserSkills();
+
+            } catch (error) {
+
+                console.error("Failed to add skill:", error);
+
+                alert("Could not add skill: " + error.message);
+
+                saveButton.disabled = false;
+                saveButton.textContent = "Add Skill";
+
+            }
+
+        });
+
+
+    // Close when clicking outside popup
+    overlay.addEventListener("click", function (event) {
+
+        if (event.target === overlay) {
+            overlay.remove();
+        }
+
+    });
+
+}
+
+
+// Load real profile data
+loadProfile();
+        const navUserButton =
+    document.getElementById("navUserButton");
+
+const userDropdown =
+    document.getElementById("userDropdown");
+
+
+navUserButton.addEventListener("click", function(event) {
+
+    event.stopPropagation();
+
+    userDropdown.classList.toggle("show");
+
+});
+
+
+document.addEventListener("click", function(event) {
+
+    if (
+        !navUserButton.contains(event.target) &&
+        !userDropdown.contains(event.target)
+    ) {
+
+        userDropdown.classList.remove("show");
+
+    }
+
+});
+
+
+function logoutUser() {
+
+    const confirmLogout =
+        confirm("Are you sure you want to log out?");
+
+    if (confirmLogout) {
+
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+
+        window.location.href = "login.html";
+
+    }
+} 
+loadProfile();
+loadUserSkills();
+
+    </script>
+
+</body>
+
+</html>

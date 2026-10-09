@@ -1,0 +1,1128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications | SkillSwap</title>
+
+    <link rel="stylesheet" href="frontend\css/style.css"> 
+    <script src="api.js"></script>
+</head>
+
+<body class="notifications-body">
+
+<header class="dashboard-navbar">
+
+   <div class="logo">
+    <img src="images/skillswap-logo.png" alt="SkillSwap">
+</div>
+
+    <nav class="dashboard-nav">
+
+        <a href="dashboard.html" class="nav-link">
+            <span class="nav-icon">⌂</span>
+            Home
+        </a>
+
+        <a href="profile.html" class="nav-link">
+            <span class="nav-icon">◎</span>
+            Profile
+        </a>
+
+        <a href="discover.html" class="nav-link">
+            <span class="nav-icon">⌕</span>
+            Discover
+        </a>
+
+        <a href="requests.html" class="nav-link">
+            <span class="nav-icon">♧</span>
+            Requests
+        </a>
+
+        <a href="chat.html" class="nav-link">
+            <span class="nav-icon">◌</span>
+            Chat 
+
+            <a href="sessions.html" class="nav-link">
+    <span class="nav-icon">📅</span>
+    Sessions
+</a> 
+
+
+<a href="reviews.html" class="nav-link">
+    <span class="nav-icon">★</span>
+    Reviews
+</a>
+
+        
+
+    </nav>
+
+    <div class="nav-actions">
+
+        <button
+    class="notification-btn active"
+    title="Notifications"
+    onclick="window.location.href='notifications.html'"
+>
+    ♧
+    <span class="notification-dot"></span>
+</button>
+
+        <div class="nav-divider"></div>
+
+        <div class="nav-user-wrapper">
+
+    <button class="nav-user" id="navUserButton">
+
+        <div class="avatar">
+            A
+        </div>
+
+        <div class="nav-user-info">
+            <strong>Student</strong>
+            <span>CSE Student</span>
+        </div>
+
+        <span class="nav-chevron">⌄</span>
+
+    </button>
+
+    <div class="user-dropdown" id="userDropdown">
+
+        <a href="profile.html" class="user-dropdown-item">
+            <span>◎</span>
+            <div>
+                <strong>Profile</strong>
+                <small>View your profile</small>
+            </div>
+        </a>
+
+        <a href="settings.html" class="user-dropdown-item">
+            <span>⚙</span>
+            <div>
+                <strong>Settings</strong>
+                <small>Manage your account</small>
+            </div>
+        </a>
+
+        <div class="user-dropdown-divider"></div>
+
+        <button
+            class="user-dropdown-item logout-dropdown"
+            onclick="logoutUser()"
+        >
+            <span>↪</span>
+            <div>
+                <strong>Logout</strong>
+                <small>Sign out of SkillSwap</small>
+            </div>
+        </button>
+
+    </div>
+
+</div>
+    </div>
+
+</header>
+
+
+<main class="notifications-page">
+
+    <!-- PAGE HEADER -->
+
+    <section class="notifications-header">
+
+        <div>
+            <span class="notifications-eyebrow">
+                STAY UPDATED
+            </span>
+
+            <h1>Your Notifications</h1>
+
+            <p>
+                Keep track of requests, messages, connections and learning activity.
+            </p>
+        </div>
+
+        <button class="mark-all-btn" id="markAllBtn">
+            ✓ Mark all as read
+        </button>
+
+    </section>
+
+
+    <!-- STATS -->
+
+    <section class="notification-stats">
+
+        <div class="notification-stat-card">
+            <div class="notification-stat-icon">♧</div>
+
+            <div>
+                <span>Total</span>
+                <strong id="totalCount">8</strong>
+            </div>
+        </div>
+
+
+        <div class="notification-stat-card unread-stat">
+            <div class="notification-stat-icon">●</div>
+
+            <div>
+                <span>Unread</span>
+                <strong id="unreadCount">5</strong>
+            </div>
+        </div>
+
+
+        <div class="notification-stat-card">
+            <div class="notification-stat-icon">✓</div>
+
+            <div>
+                <span>Read</span>
+                <strong id="readCount">3</strong>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- TOOLBAR -->
+
+    <section class="notifications-toolbar">
+
+        <div class="notification-filters">
+
+            <button class="notification-filter active" data-filter="all">
+                All
+            </button>
+
+            <button class="notification-filter" data-filter="unread">
+                Unread
+            </button>
+
+            <button class="notification-filter" data-filter="requests">
+                Requests
+            </button>
+
+            <button class="notification-filter" data-filter="messages">
+                Messages
+            </button>
+
+            <button class="notification-filter" data-filter="sessions">
+                Sessions
+            </button>
+
+        </div>
+
+
+        <div class="notification-search">
+
+            <span>⌕</span>
+
+            <input
+                type="text"
+                id="notificationSearch"
+                placeholder="Search notifications..."
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- NOTIFICATIONS -->
+
+    <section class="notification-list" id="notificationList">
+
+
+        <!-- NOTIFICATION 1 -->
+
+        <article
+            class="notification-card unread"
+            data-type="requests"
+            data-read="false"
+        >
+
+            <div class="notification-icon request-icon">
+                ♧
+            </div>
+
+            <div class="notification-content">
+
+                <div class="notification-top">
+
+                    <h3>New skill request</h3>
+
+                    <span class="notification-time">
+                        5 min ago
+                    </span>
+
+                </div>
+
+                <p>
+                    <strong>Rahul Sharma</strong> wants to learn
+                    <strong>Java</strong> from you.
+                </p>
+
+                <div class="notification-actions">
+
+                    <button
+                        class="notification-primary"
+                        onclick="openRequests()"
+                    >
+                        View Request
+                    </button>
+
+                    <button
+                        class="notification-read"
+                        onclick="markRead(this)"
+                    >
+                        Mark as read
+                    </button>
+
+                </div>
+
+            </div>
+
+            <span class="unread-dot"></span>
+
+        </article>
+
+
+        <!-- NOTIFICATION 2 -->
+
+        <article
+            class="notification-card unread"
+            data-type="messages"
+            data-read="false"
+        >
+
+            <div class="notification-icon message-icon">
+                ◌
+            </div>
+
+            <div class="notification-content">
+
+                <div class="notification-top">
+
+                    <h3>New message</h3>
+
+                    <span class="notification-time">
+                        18 min ago
+                    </span>
+
+                </div>
+
+                <p>
+                    <strong>Priya Patil</strong> sent you a new message
+                    about the upcoming skill session.
+                </p>
+
+                <div class="notification-actions">
+
+                    <button
+                        class="notification-primary"
+                        onclick="openChat()"
+                    >
+                        Open Chat
+                    </button>
+
+                    <button
+                        class="notification-read"
+                        onclick="markRead(this)"
+                    >
+                        Mark as read
+                    </button>
+
+                </div>
+
+            </div>
+
+            <span class="unread-dot"></span>
+
+        </article>
+
+
+        <!-- NOTIFICATION 3 -->
+
+        <article
+            class="notification-card unread"
+            data-type="requests"
+            data-read="false"
+        >
+
+            <div class="notification-icon success-icon">
+                ✓
+            </div>
+
+            <div class="notification-content">
+
+                <div class="notification-top">
+
+                    <h3>Request accepted</h3>
+
+                    <span class="notification-time">
+                        1 hour ago
+                    </span>
+
+                </div>
+
+                <p>
+                    <strong>Aman Khan</strong> accepted your request
+                    to learn <strong>Python</strong>.
+                </p>
+
+                <div class="notification-actions">
+
+                    <button
+                        class="notification-primary"
+                        onclick="openChat()"
+                    >
+                        Start Conversation
+                    </button>
+
+                    <button
+                        class="notification-read"
+                        onclick="markRead(this)"
+                    >
+                        Mark as read
+                    </button>
+
+                </div>
+
+            </div>
+
+            <span class="unread-dot"></span>
+
+        </article>
+
+
+        <!-- NOTIFICATION 4 -->
+
+        <article
+            class="notification-card unread"
+            data-type="sessions"
+            data-read="false"
+        >
+
+            <div class="notification-icon session-icon">
+                ◷
+            </div>
+
+            <div class="notification-content">
+
+                <div class="notification-top">
+
+                    <h3>Upcoming learning session</h3>
+
+                    <span class="notification-time">
+                        2 hours ago
+                    </span>
+
+                </div>
+
+                <p>
+                    Your Java learning session with
+                    <strong>Rahul Sharma</strong> is scheduled for
+                    <strong>Tomorrow at 6:00 PM</strong>.
+                </p>
+
+                <div class="notification-actions">
+
+                    <button
+                        class="notification-primary"
+                        onclick="showSession()"
+                    >
+                        View Session
+                    </button>
+
+                    <button
+                        class="notification-read"
+                        onclick="markRead(this)"
+                    >
+                        Mark as read
+                    </button>
+
+                </div>
+
+            </div>
+
+            <span class="unread-dot"></span>
+
+        </article>
+
+
+        <!-- NOTIFICATION 5 -->
+
+        <article
+            class="notification-card unread"
+            data-type="messages"
+            data-read="false"
+        >
+
+            <div class="notification-icon message-icon">
+                ◌
+            </div>
+
+            <div class="notification-content">
+
+                <div class="notification-top">
+
+                    <h3>New message</h3>
+
+                    <span class="notification-time">
+                        Yesterday
+                    </span>
+
+                </div>
+
+                <p>
+                    <strong>Sneha Joshi</strong> replied to your
+                    conversation.
+                </p>
+
+                <div class="notification-actions">
+
+                    <button
+                        class="notification-primary"
+                        onclick="openChat()"
+                    >
+                        Open Chat
+                    </button>
+
+                    <button
+                        class="notification-read"
+                        onclick="markRead(this)"
+                    >
+                        Mark as read
+                    </button>
+
+                </div>
+
+            </div>
+
+            <span class="unread-dot"></span>
+
+        </article>
+
+
+        <!-- NOTIFICATION 6 -->
+
+        <article
+            class="notification-card"
+            data-type="requests"
+            data-read="true"
+        >
+
+            <div class="notification-icon request-icon">
+                ♧
+            </div>
+
+            <div class="notification-content">
+
+                <div class="notification-top">
+
+                    <h3>New connection request</h3>
+
+                    <span class="notification-time">
+                        Yesterday
+                    </span>
+
+                </div>
+
+                <p>
+                    <strong>Neha Kulkarni</strong> wants to connect
+                    with you for UI/UX learning.
+                </p>
+
+                <div class="notification-actions">
+
+                    <button
+                        class="notification-secondary"
+                        onclick="openRequests()"
+                    >
+                        View Request
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- NOTIFICATION 7 -->
+
+        <article
+            class="notification-card"
+            data-type="sessions"
+            data-read="true"
+        >
+
+            <div class="notification-icon session-icon">
+                ◷
+            </div>
+
+            <div class="notification-content">
+
+                <div class="notification-top">
+
+                    <h3>Session completed</h3>
+
+                    <span class="notification-time">
+                        2 days ago
+                    </span>
+
+                </div>
+
+                <p>
+                    Your Python learning session with
+                    <strong>Aman Khan</strong> has been completed.
+                </p>
+
+                <div class="notification-actions">
+
+                    <button
+                        class="notification-secondary"
+                        onclick="showReview()"
+                    >
+                        Leave Review
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- NOTIFICATION 8 -->
+
+        <article
+            class="notification-card"
+            data-type="messages"
+            data-read="true"
+        >
+
+            <div class="notification-icon success-icon">
+                ✓
+            </div>
+
+            <div class="notification-content">
+
+                <div class="notification-top">
+
+                    <h3>Profile updated</h3>
+
+                    <span class="notification-time">
+                        3 days ago
+                    </span>
+
+                </div>
+
+                <p>
+                    Your SkillSwap profile has been successfully updated.
+                </p>
+
+                <div class="notification-actions">
+
+                    <button
+                        class="notification-secondary"
+                        onclick="openProfile()"
+                    >
+                        View Profile
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+
+    <!-- EMPTY STATE -->
+
+    <section class="notification-empty" id="notificationEmpty">
+
+        <div class="empty-notification-icon">
+            ✓
+        </div>
+
+        <h2>No notifications found</h2>
+
+        <p>
+            You're all caught up. New activity will appear here.
+        </p>
+
+    </section>
+
+</main>
+
+
+<script> 
+if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+
+    let notificationCards =
+        document.querySelectorAll(".notification-card");
+
+    const filterButtons =
+        document.querySelectorAll(".notification-filter");
+
+    const searchInput =
+        document.getElementById("notificationSearch");
+
+    const emptyState =
+        document.getElementById("notificationEmpty");
+
+    const unreadCountElement =
+        document.getElementById("unreadCount");
+
+    const readCountElement =
+        document.getElementById("readCount");
+
+    const totalCountElement =
+        document.getElementById("totalCount");
+
+
+    function updateCounts() {
+
+        const cards =
+            document.querySelectorAll(".notification-card");
+
+        let unread = 0;
+
+        cards.forEach(card => {
+
+            if (card.dataset.read === "false") {
+                unread++;
+            }
+
+        });
+
+        const total = cards.length;
+        const read = total - unread;
+
+        totalCountElement.textContent = total;
+        unreadCountElement.textContent = unread;
+        readCountElement.textContent = read;
+
+    }
+
+
+    function markRead(button) {
+
+        const card =
+            button.closest(".notification-card");
+
+        card.dataset.read = "true";
+
+        card.classList.remove("unread");
+
+        const dot =
+            card.querySelector(".unread-dot");
+
+        if (dot) {
+            dot.remove();
+        }
+
+        button.remove();
+
+        updateCounts();
+
+    }
+
+
+    document
+        .getElementById("markAllBtn")
+        .addEventListener("click", () => {
+
+            notificationCards.forEach(card => {
+
+                card.dataset.read = "true";
+
+                card.classList.remove("unread");
+
+                const dot =
+                    card.querySelector(".unread-dot");
+
+                if (dot) {
+                    dot.remove();
+                }
+
+                const button =
+                    card.querySelector(".notification-read");
+
+                if (button) {
+                    button.remove();
+                }
+
+            });
+
+            updateCounts();
+
+        });
+
+
+    filterButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            filterButtons.forEach(btn =>
+                btn.classList.remove("active")
+            );
+
+            button.classList.add("active");
+
+            const filter =
+                button.dataset.filter;
+
+            filterNotifications(filter);
+
+        });
+
+    });
+
+
+    function filterNotifications(filter) {  
+
+        notificationCards = document.querySelectorAll(".notification-card");
+
+        const search =
+            searchInput.value.toLowerCase().trim();
+
+        let visible = 0;
+
+        notificationCards.forEach(card => {
+
+            const type =
+                card.dataset.type;
+
+            const isUnread =
+                card.dataset.read === "false";
+
+            const text =
+                card.textContent.toLowerCase();
+
+            let matchesFilter = true;
+
+            let matchesSearch =
+                text.includes(search);
+
+
+            if (filter === "unread") {
+                matchesFilter = isUnread;
+            }
+
+            else if (filter !== "all") {
+                matchesFilter = type === filter;
+            }
+
+
+            if (matchesFilter && matchesSearch) {
+
+                card.style.display = "flex";
+
+                visible++;
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+
+        emptyState.style.display =
+            visible === 0 ? "flex" : "none";
+
+    }
+
+
+    searchInput.addEventListener("input", () => {
+
+        const activeFilter =
+            document.querySelector(
+                ".notification-filter.active"
+            ).dataset.filter;
+
+        filterNotifications(activeFilter);
+
+    });
+
+
+    function openRequests() {
+        window.location.href = "requests.html";
+    }
+
+
+    function openChat() {
+        window.location.href = "chat.html";
+    }
+
+
+    function openProfile() {
+        window.location.href = "profile.html";
+    }
+
+
+    function showSession() {
+        alert(
+            "Session details will be available when the backend is connected."
+        );
+    }
+
+
+    function showReview() {
+        alert(
+            "Review system will be connected with the backend later."
+        );
+    }
+
+async function loadRealNotifications() {
+
+    try {
+
+        const notifications = await getNotifications();
+
+        console.log(
+            "Notifications loaded from backend:",
+            notifications
+        );
+
+        const notificationList =
+            document.getElementById("notificationList");
+
+        notificationList.innerHTML = "";
+
+        if (!notifications || notifications.length === 0) {
+
+            emptyState.style.display = "flex";
+            updateCounts();
+            return;
+        }
+
+        emptyState.style.display = "none";
+
+        notifications.forEach(function(notification) {
+
+            const card =
+                document.createElement("article");
+
+            const isRead =
+                notification.isRead === true;
+
+            card.className =
+                "notification-card" +
+                (isRead ? "" : " unread");
+
+            card.dataset.read =
+                isRead ? "true" : "false";
+
+            const type =
+                notification.type || "messages";
+
+            card.dataset.type =
+                type.toLowerCase().includes("skill") ||
+                type.toLowerCase().includes("request")
+                    ? "requests"
+                    : type.toLowerCase().includes("session")
+                        ? "sessions"
+                        : "messages";
+
+            const title =
+                notification.type || "Notification";
+
+            const message =
+                notification.message || "You have a new notification.";
+
+            card.dataset.notificationId =
+                notification.id;
+
+            card.innerHTML = `
+
+                <div class="notification-icon request-icon">
+                    ♧
+                </div>
+
+                <div class="notification-content">
+
+                    <div class="notification-top">
+
+                        <h3>
+                            ${escapeHTML(title)}
+                        </h3>
+
+                        <span class="notification-time">
+                            ${formatNotificationTime(
+                                notification.createdAt
+                            )}
+                        </span>
+
+                    </div>
+
+                    <p>
+                        ${escapeHTML(message)}
+                    </p>
+
+                    ${
+                        !isRead
+                            ? `
+                                <div class="notification-actions">
+                                    <button
+                                        class="notification-read"
+                                        onclick="markRealNotificationRead(this)"
+                                    >
+                                        Mark as read
+                                    </button>
+                                </div>
+                            `
+                            : ""
+                    }
+
+                </div>
+
+                ${
+                    !isRead
+                        ? `<span class="unread-dot"></span>`
+                        : ""
+                }
+
+            `;
+
+            notificationList.appendChild(card);
+
+        });
+
+        updateCounts();
+
+        console.log(
+            "Real notifications displayed successfully."
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Failed to load notifications:",
+            error
+        );
+    }
+} 
+
+function escapeHTML(value) {
+    const div = document.createElement("div");
+    div.textContent = value ?? "";
+    return div.innerHTML;
+}
+
+function formatNotificationTime(dateString) {
+
+    if (!dateString) {
+        return "";
+    }
+
+    const date = new Date(dateString);
+
+    return date.toLocaleString([], {
+        dateStyle: "medium",
+        timeStyle: "short"
+    });
+}  
+
+async function markRealNotificationRead(button) {
+
+    const card =
+        button.closest(".notification-card");
+
+    const notificationId =
+        card.dataset.notificationId;
+
+    if (!notificationId) {
+        return;
+    }
+
+    try {
+
+        await markNotificationRead(notificationId);
+
+        card.dataset.read = "true";
+
+        card.classList.remove("unread");
+
+        const dot =
+            card.querySelector(".unread-dot");
+
+        if (dot) {
+            dot.remove();
+        }
+
+        button.remove();
+
+        updateCounts();
+
+        console.log(
+            "Notification marked as read:",
+            notificationId
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Failed to mark notification as read:",
+            error
+        );
+
+        alert(
+            "Could not mark notification as read: " +
+            error.message
+        );
+    }
+}
+
+  loadRealNotifications();
+
+    const navUserButton = document.getElementById("navUserButton");
+const userDropdown = document.getElementById("userDropdown");
+
+navUserButton.addEventListener("click", function(event) {
+    event.stopPropagation();
+    userDropdown.classList.toggle("show");
+});
+
+document.addEventListener("click", function(event) {
+    if (
+        !navUserButton.contains(event.target) &&
+        !userDropdown.contains(event.target)
+    ) {
+        userDropdown.classList.remove("show");
+    }
+});
+
+function logoutUser() {
+
+    const confirmLogout =
+        confirm("Are you sure you want to log out?");
+
+    if (confirmLogout) {
+
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+
+        window.location.href = "login.html";
+    }
+
+}
+</script>
+
+</body>
+</html>
